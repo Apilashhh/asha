@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asha Balasureshwaran - Astrophysicist Portfolio</title>
+    <meta name="description" content="Asha Balasureshwaran - Aspiring Astrophysicist | Physics & Earth Sciences Student at Université Paris-Saclay">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', Georgia, serif;
+        }
+        
+        .stars, .stars2, .stars3 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+        
+        .stars {
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, white, transparent),
+                radial-gradient(2px 2px at 60% 70%, white, transparent),
+                radial-gradient(1px 1px at 50% 50%, white, transparent),
+                radial-gradient(1px 1px at 80% 10%, white, transparent),
+                radial-gradient(2px 2px at 90% 60%, white, transparent),
+                radial-gradient(1px 1px at 33% 80%, white, transparent),
+                radial-gradient(1px 1px at 15% 90%, white, transparent);
+            background-size: 200% 200%;
+            animation: twinkle 5s ease-in-out infinite;
+        }
+        
+        .stars2 {
+            background-image: 
+                radial-gradient(1px 1px at 10% 20%, white, transparent),
+                radial-gradient(1px 1px at 40% 60%, white, transparent),
+                radial-gradient(1px 1px at 70% 30%, white, transparent),
+                radial-gradient(1px 1px at 25% 75%, white, transparent),
+                radial-gradient(1px 1px at 85% 85%, white, transparent);
+            background-size: 200% 200%;
+            animation: twinkle 7s ease-in-out infinite;
+            opacity: 0.5;
+        }
+        
+        .stars3 {
+            background-image: 
+                radial-gradient(1px 1px at 30% 10%, white, transparent),
+                radial-gradient(1px 1px at 65% 45%, white, transparent),
+                radial-gradient(1px 1px at 45% 85%, white, transparent),
+                radial-gradient(1px 1px at 75% 20%, white, transparent);
+            background-size: 200% 200%;
+            animation: twinkle 9s ease-in-out infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+        
+        .bg-cosmic {
+            background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(90deg, #fbbf24, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            border-color: rgba(251, 191, 36, 0.4);
+            box-shadow: 0 10px 40px rgba(251, 191, 36, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #fbbf24, #f97316);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(251, 191, 36, 0.5);
+        }
+        
+        .btn-outline {
+            border: 2px solid #fbbf24;
+            color: #fbbf24;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background: #fbbf24;
+            color: #0a0e27;
+            transform: scale(1.05);
+        }
+        
+        .skill-tag {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            color: #fbbf24;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        
+        .skill-tag:hover {
+            background: rgba(251, 191, 36, 0.2);
+            color: white;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link.active {
+            color: #fbbf24;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #fbbf24, #f97316);
+        }
+        
+        #mobileMenu {
+            display: none;
+        }
+        
+        #mobileMenu.show {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-cosmic text-white">
+
+    <!-- Header / Navigation -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-gradient">
+                    Asha B.
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Home</a>
+                    <a href="#about" class="nav-link text-sm font-medium text-gray-300 hover:text-white">About</a>
+                    <a href="#education" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Education</a>
+                    <a href="#experience" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Experience</a>
+                    <a href="#certifications" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Certifications</a>
+                    <a href="#contact" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Contact</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-white">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden mt-4 pb-4 space-y-4 border-t border-gray-700 pt-4">
+                <a href="#home" class="block text-sm font-medium text-gray-300">Home</a>
+                <a href="#about" class="block text-sm font-medium text-gray-300">About</a>
+                <a href="#education" class="block text-sm font-medium text-gray-300">Education</a>
+                <a href="#experience" class="block text-sm font-medium text-gray-300">Experience</a>
+                <a href="#certifications" class="block text-sm font-medium text-gray-300">Certifications</a>
+                <a href="#contact" class="block text-sm font-medium text-gray-300">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="stars"></div>
+            <div class="stars2"></div>
+            <div class="stars3"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 py-20 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                <div class="flex-1 text-center lg:text-left space-y-6 animate-fade-in">
+                    <div class="inline-flex items-center gap-2 bg-amber-400/10 px-4 py-2 rounded-full border border-amber-400/30">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-amber-400"></i>
+                        <span class="text-sm text-amber-400">Aspiring Astrophysicist</span>
+                    </div>
+                    
+                    <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+                        <span class="block text-white">Asha</span>
+                        <span class="block text-gradient">Balasureshwaran</span>
+                    </h1>
+                    
+                    <p class="text-xl text-gray-300 max-w-2xl">
+                        Physics & Earth Sciences Student at Paris-Saclay University, specializing in Astrophysics.
+                        Passionate about unraveling the mysteries of the cosmos through data analysis and research.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#contact" class="btn-primary inline-flex items-center justify-center px-8 py-4 text-lg text-white rounded-full font-medium">
+                            <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+                            Get in Touch
+                        </a>
+                        <a href="#experience" class="btn-outline inline-flex items-center justify-center px-8 py-4 text-lg rounded-full font-medium">
+                            <i data-lucide="download" class="w-5 h-5 mr-2"></i>
+                            View Research
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="flex-1 flex justify-center lg:justify-end animate-fade-in-up">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full blur-xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
+                        <div class="relative">
+                            <div class="w-80 h-80 rounded-full overflow-hidden border-4 border-amber-400/30 shadow-2xl">
+                                <img src="https://customer-assets.emergentagent.com/job_asha-stars/artifacts/c3eaagcq_1690292697059.jfif" alt="Asha Balasureshwaran" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 relative">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">About Me</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        I am a dedicated physics student at <span class="text-amber-400 font-semibold">Université Paris-Saclay</span>,
+                        one of the world's leading institutions for scientific research. My academic journey focuses on the
+                        intersection of physics and Earth sciences, with a specialized focus on astrophysics.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Through my research experience at the <span class="text-amber-400 font-semibold">Institut d'Astrophysique Spatiale</span>,
+                        I've developed expertise in analyzing UV data from solar observations, working with advanced tools in Python
+                        to understand the dynamic processes occurring in our Sun.
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        Beyond academics, I am passionate about cultural heritage, having achieved the highest honors in Tamil language
+                        studies and earned my 1st DAN in Taekwondo, demonstrating my commitment to discipline and continuous growth.
+                    </p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="card p-6 rounded-lg">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-amber-400/10 p-3 rounded-lg">
+                                <i data-lucide="target" class="w-6 h-6 text-amber-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-white mb-2">Research Focus</h3>
+                                <p class="text-gray-300">Solar physics, UV data analysis, plasma dynamics, and time-series analysis of astronomical phenomena</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-6 rounded-lg">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-amber-400/10 p-3 rounded-lg">
+                                <i data-lucide="heart" class="w-6 h-6 text-amber-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-white mb-2">Passions</h3>
+                                <p class="text-gray-300">Exploring the cosmos, data visualization, Tamil culture and theater, Taekwondo martial arts</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-6 rounded-lg">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-amber-400/10 p-3 rounded-lg">
+                                <i data-lucide="user" class="w-6 h-6 text-amber-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-white mb-2">Skills</h3>
+                                <div class="flex flex-wrap gap-2 mt-3">
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">MATLAB</span>
+                                    <span class="skill-tag">UV Imaging</span>
+                                    <span class="skill-tag">Data Analysis</span>
+                                    <span class="skill-tag">Research</span>
+                                    <span class="skill-tag">LaTeX</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-24 px-6 relative" style="background: #0d1129;">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Education</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="space-y-8">
+                <!-- Paris-Saclay -->
+                <div class="card p-8 rounded-lg">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="bg-amber-400/10 p-4 rounded-lg h-fit">
+                            <i data-lucide="graduation-cap" class="w-10 h-10 text-amber-400"></i>
+                        </div>
+                        
+                        <div class="flex-1 space-y-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-2">Université Paris-Saclay</h3>
+                                <p class="text-xl text-amber-400 mb-1">Double-Bachelor's Degree in Physics and Earth Sciences</p>
+                                <p class="text-gray-300 mb-2">Astrophysics Option</p>
+                                <div class="flex items-center gap-2 text-gray-400">
+                                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                                    <span>2023 - Present</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-2">Highlights</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-gray-300">
+                                        <span class="text-amber-400 mt-1">•</span>
+                                        <span>1st Mathematics University in the World (3rd consecutive time)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-gray-300">
+                                        <span class="text-amber-400 mt-1">•</span>
+                                        <span>12th Ranked University worldwide (Shanghai Rankings)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-gray-300">
+                                        <span class="text-amber-400 mt-1">•</span>
+                                        <span>1st University in Physics in France, 9th in the World</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-gray-300">
+                                        <span class="text-amber-400 mt-1">•</span>
+                                        <span>19th in Natural Sciences worldwide</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-3">Relevant Courses</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="skill-tag">Applied Mathematics</span>
+                                    <span class="skill-tag">Atoms, Molecules, Solid State</span>
+                                    <span class="skill-tag">Geometric Optics</span>
+                                    <span class="skill-tag">Mechanics & Electromagnetism</span>
+                                    <span class="skill-tag">Transformations of Matter</span>
+                                    <span class="skill-tag">Linear Algebra</span>
+                                    <span class="skill-tag">Measurements in Geosciences</span>
+                                    <span class="skill-tag">Earth System</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tamil Education -->
+                <div class="card p-8 rounded-lg">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="bg-amber-400/10 p-4 rounded-lg h-fit">
+                            <i data-lucide="graduation-cap" class="w-10 h-10 text-amber-400"></i>
+                        </div>
+                        
+                        <div class="flex-1 space-y-4">
+                            <div>
+                                <h3 class="text-2xl font-bold text-white mb-2">Tamil Education Development Council</h3>
+                                <p class="text-xl text-amber-400 mb-1">International Examination Tamil</p>
+                                <p class="text-gray-300 mb-2">Tamil Language & Literature</p>
+                                <div class="flex items-center gap-2 text-gray-400">
+                                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                                    <span>2011 - 2024</span>
+                                    <span class="mx-2">•</span>
+                                    <i data-lucide="award" class="w-4 h-4 text-amber-400"></i>
+                                    <span class="text-amber-400">Highest Honors</span>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-2">Highlights</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-gray-300">
+                                        <span class="text-amber-400 mt-1">•</span>
+                                        <span>First place in regional eloquence competitions (multiple years)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-gray-300">
+                                        <span class="text-amber-400 mt-1">•</span>
+                                        <span>Top position in Tamil Exams consistently</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-gray-300">
+                                        <span class="text-amber-400 mt-1">•</span>
+                                        <span>Participation in Tamil Schools Olympic Games (3x First Place + Trophy)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-gray-300">
+                                        <span class="text-amber-400 mt-1">•</span>
+                                        <span>Active participation in Tamil theater productions</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 px-6 relative">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Research Experience</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="space-y-12">
+                <!-- Research Intern -->
+                <div class="card p-8 rounded-lg">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="bg-amber-400/10 p-3 rounded-lg">
+                            <i data-lucide="briefcase" class="w-6 h-6 text-amber-400"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-white mb-2">Research Intern (Solar Studies)</h3>
+                            <p class="text-xl text-amber-400 mb-2">Institut d'Astrophysique Spatiale</p>
+                            <div class="space-y-1 text-gray-400 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                    <span>Île-de-France, France</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                                    <span>June 2025 - July 2025</span>
+                                    <span class="mx-2">•</span>
+                                    <span>2 months</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        Analysis of UV data from the EUI imager on board the Solar Orbiter probe, using tools developed in Python. 
+                        Analysis of time series, at a rate of a few seconds, of the evolution of a solar prominence. 
+                        Measurement of the variation in intensity at the base of the structure, as a signature of plasma flow. 
+                        Characterisation of these flows in terms of velocity amplitude, direction and possibly energy.
+                    </p>
+                    
+                    <div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <i data-lucide="code" class="w-4 h-4 text-amber-400"></i>
+                            <h4 class="text-lg font-semibold text-white">Skills & Technologies</h4>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">UV Imaging Analysis</span>
+                            <span class="skill-tag">Time Series Analysis</span>
+                            <span class="skill-tag">Data Visualization</span>
+                            <span class="skill-tag">Solar Physics</span>
+                            <span class="skill-tag">Plasma Dynamics</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Laboratory Intern -->
+                <div class="card p-8 rounded-lg">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="bg-amber-400/10 p-3 rounded-lg">
+                            <i data-lucide="briefcase" class="w-6 h-6 text-amber-400"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-white mb-2">Laboratory Intern</h3>
+                            <p class="text-xl text-amber-400 mb-2">Lycée Chateaubriand</p>
+                            <div class="space-y-1 text-gray-400 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                    <span>Paris, Île-de-France, France</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                                    <span>November 2019 - December 2019</span>
+                                    <span class="mx-2">•</span>
+                                    <span>2 months</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-lg font-semibold text-white mb-2">Key Responsibilities</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-start gap-2 text-gray-300 text-sm">
+                                <span class="text-amber-400 mt-1">•</span>
+                                <span>Assisted in conducting experiments and data collection in the field of physics</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-gray-300 text-sm">
+                                <span class="text-amber-400 mt-1">•</span>
+                                <span>Collaborated with a team of researchers to analyze and interpret experimental results</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-gray-300 text-sm">
+                                <span class="text-amber-400 mt-1">•</span>
+                                <span>Utilized scientific software and programming languages (Python, MATLAB) to process and analyze data</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-gray-300 text-sm">
+                                <span class="text-amber-400 mt-1">•</span>
+                                <span>Contributed to the preparation of scientific reports</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-gray-300 text-sm">
+                                <span class="text-amber-400 mt-1">•</span>
+                                <span>Demonstrated strong commitment to safety protocols and ethical considerations</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <i data-lucide="code" class="w-4 h-4 text-amber-400"></i>
+                            <h4 class="text-lg font-semibold text-white">Skills & Technologies</h4>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">Laboratory Skills</span>
+                            <span class="skill-tag">Research Analysis</span>
+                            <span class="skill-tag">Scientific Computing</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">MATLAB</span>
+                            <span class="skill-tag">Data Analysis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-24 px-6 relative" style="background: #0d1129;">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Certifications & Achievements</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded-full"></div>
+            </div>
+            
+            <!-- Certifications Grid -->
+            <div class="grid md:grid-cols-2 gap-6 mb-16">
+                <!-- Cambridge English -->
+                <div class="card p-6 rounded-lg">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="bg-amber-400/10 p-3 rounded-lg">
+                            <i data-lucide="award" class="w-6 h-6 text-amber-400"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white mb-1">English Certificate Level B2</h3>
+                            <p class="text-amber-400 mb-2">University of Cambridge</p>
+                            <div class="text-sm text-gray-400 space-y-1">
+                                <p>Issued: June 2023 • Expires: June 2025</p>
+                                <p class="font-mono text-xs">Valid through 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-xs">English Translation</span>
+                        <span class="skill-tag text-xs">English Grammar</span>
+                        <span class="skill-tag text-xs">Written & Spoken English</span>
+                    </div>
+                </div>
+                
+                <!-- Pix 1 -->
+                <div class="card p-6 rounded-lg">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="bg-amber-400/10 p-3 rounded-lg">
+                            <i data-lucide="star" class="w-6 h-6 text-amber-400"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white mb-1">Pix Digital Competency</h3>
+                            <p class="text-amber-400 mb-2">Pix</p>
+                            <div class="text-sm text-gray-400 space-y-1">
+                                <p>Issued: January 2024</p>
+                                <p class="font-mono text-xs">ID: P-H73GXYW8</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-xs">Data Analysis</span>
+                        <span class="skill-tag text-xs">Programming</span>
+                        <span class="skill-tag text-xs">Communication</span>
+                        <span class="skill-tag text-xs">Problem Solving</span>
+                    </div>
+                </div>
+                
+                <!-- Pix 2 -->
+                <div class="card p-6 rounded-lg">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="bg-amber-400/10 p-3 rounded-lg">
+                            <i data-lucide="star" class="w-6 h-6 text-amber-400"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white mb-1">Pix Digital Skills</h3>
+                            <p class="text-amber-400 mb-2">Pix</p>
+                            <div class="text-sm text-gray-400 space-y-1">
+                                <p>Issued: February 2023 • Expires: February 2026</p>
+                                <p class="font-mono text-xs">ID: P-RCXHKDV3</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-xs">Digital Environment</span>
+                        <span class="skill-tag text-xs">Cybersecurity</span>
+                        <span class="skill-tag text-xs">Digital Analysis</span>
+                    </div>
+                </div>
+                
+                <!-- Taekwondo -->
+                <div class="card p-6 rounded-lg">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="bg-amber-400/10 p-3 rounded-lg">
+                            <i data-lucide="trophy" class="w-6 h-6 text-amber-400"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white mb-1">1st DAN Black Belt</h3>
+                            <p class="text-amber-400 mb-2">Fédération Française de Taekwondo</p>
+                            <div class="text-sm text-gray-400 space-y-1">
+                                <p>Issued: January 2023</p>
+                                <p class="font-mono text-xs">ID: 2394108069</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-xs">Martial Arts</span>
+                        <span class="skill-tag text-xs">Taekwondo</span>
+                        <span class="skill-tag text-xs">Discipline</span>
+                        <span class="skill-tag text-xs">Physical Training</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Achievements -->
+            <div>
+                <h3 class="text-3xl font-bold text-center mb-8">
+                    <span class="text-white">Notable </span>
+                    <span class="text-gradient">Achievements</span>
+                </h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="card p-6 rounded-lg text-center">
+                        <div class="bg-amber-400/10 p-4 rounded-full w-fit mx-auto mb-4">
+                            <i data-lucide="medal" class="w-8 h-8 text-amber-400"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Tamil Language Excellence</h4>
+                        <p class="text-gray-300 text-sm">First place in regional eloquence competitions for multiple consecutive years</p>
+                    </div>
+                    
+                    <div class="card p-6 rounded-lg text-center">
+                        <div class="bg-amber-400/10 p-4 rounded-full w-fit mx-auto mb-4">
+                            <i data-lucide="trophy" class="w-8 h-8 text-amber-400"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Tamil Schools Olympic Games</h4>
+                        <p class="text-gray-300 text-sm">First place 3 times with trophy wins in Sarcelles</p>
+                    </div>
+                    
+                    <div class="card p-6 rounded-lg text-center">
+                        <div class="bg-amber-400/10 p-4 rounded-full w-fit mx-auto mb-4">
+                            <i data-lucide="award" class="w-8 h-8 text-amber-400"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Academic Excellence</h4>
+                        <p class="text-gray-300 text-sm">Consistently top position in Tamil Exams with trophies and certificates</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 relative">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Get in Touch</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded-full mb-4"></div>
+                <p class="text-gray-300 text-lg max-w-2xl mx-auto">
+                    Interested in collaborating on research projects or want to discuss astrophysics? Feel free to reach out!
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="card p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold text-white mb-6">Send a Message</h3>
+                    <form id="contactForm" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-[#0a0e27] border border-amber-400/30 rounded-lg text-white placeholder-gray-500 focus:border-amber-400 focus:outline-none" placeholder="Your Name">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-[#0a0e27] border border-amber-400/30 rounded-lg text-white placeholder-gray-500 focus:border-amber-400 focus:outline-none" placeholder="your.email@example.com">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                            <textarea id="message" name="message" required rows="5" class="w-full px-4 py-3 bg-[#0a0e27] border border-amber-400/30 rounded-lg text-white placeholder-gray-500 focus:border-amber-400 focus:outline-none resize-none" placeholder="Your message..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full inline-flex items-center justify-center px-8 py-4 text-lg text-white rounded-lg font-medium">
+                            <i data-lucide="send" class="w-5 h-5 mr-2"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="space-y-6">
+                    <div class="card p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold text-white mb-6">Connect With Me</h3>
+                        <div class="space-y-4">
+                            <a href="mailto:asha.balasureshwaran@example.com" class="flex items-center gap-4 p-4 bg-amber-400/5 border border-amber-400/20 rounded-lg hover:bg-amber-400/10 transition-all">
+                                <div class="bg-amber-400/10 p-3 rounded-lg">
+                                    <i data-lucide="mail" class="w-6 h-6 text-amber-400"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-white">Email</p>
+                                    <p class="text-sm text-gray-400">asha.balasureshwaran@email.com</p>
+                                </div>
+                            </a>
+                            
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 bg-amber-400/5 border border-amber-400/20 rounded-lg hover:bg-amber-400/10 transition-all">
+                                <div class="bg-amber-400/10 p-3 rounded-lg">
+                                    <i data-lucide="linkedin" class="w-6 h-6 text-amber-400"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-white">LinkedIn</p>
+                                    <p class="text-sm text-gray-400">Connect on LinkedIn</p>
+                                </div>
+                            </a>
+                            
+                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 bg-amber-400/5 border border-amber-400/20 rounded-lg hover:bg-amber-400/10 transition-all">
+                                <div class="bg-amber-400/10 p-3 rounded-lg">
+                                    <i data-lucide="github" class="w-6 h-6 text-amber-400"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-white">GitHub</p>
+                                    <p class="text-sm text-gray-400">View Projects on GitHub</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold text-white mb-4">Location</h3>
+                        <p class="text-gray-300 mb-2">
+                            <span class="font-semibold text-amber-400">Based in:</span> Île-de-France, France
+                        </p>
+                        <p class="text-gray-300">
+                            <span class="font-semibold text-amber-400">Currently studying at:</span> Université Paris-Saclay
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0a0e27] border-t border-amber-400/20 py-8 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-center md:text-left">
+                    <p class="text-gray-300">
+                        © <span id="currentYear"></span>
+                        <span class="text-amber-400 font-semibold"> Asha Balasureshwaran</span>. All rights reserved.
+                    </p>
+                </div>
+                
+                <div class="flex items-center gap-2 text-gray-300">
+                    <span>Made with</span>
+                    <i data-lucide="heart" class="w-4 h-4 text-amber-400 fill-current animate-pulse"></i>
+                    <span>for exploring the cosmos</span>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-400">
+                    "The cosmos is within us. We are made of star-stuff. We are a way for the universe to know itself."
+                    <span class="block mt-1 text-amber-400">- Carl Sagan</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Current year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(10, 14, 39, 0.95)';
+                header.style.backdropFilter = 'blur(12px)';
+                header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'transparent';
+                header.style.backdropFilter = 'none';
+                header.style.boxShadow = 'none';
+            }
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('show');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('show');
+            });
+        });
+        
+        // Active navigation link
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! This is a demo form. In a real website, this would send your message.');
+            contactForm.reset();
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
