@@ -37,53 +37,173 @@
             font-family: 'Crimson Text', Georgia, serif;
         }
         
-        .stars, .stars2, .stars3 {
-            position: absolute;
+        /* ========== ENHANCED STARFIELD EFFECT ========== */
+        .starfield-container {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: transparent;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
         }
         
-        .stars {
-            background-image: 
-                radial-gradient(2px 2px at 20% 30%, white, transparent),
-                radial-gradient(2px 2px at 60% 70%, white, transparent),
-                radial-gradient(1px 1px at 50% 50%, white, transparent),
-                radial-gradient(1px 1px at 80% 10%, white, transparent),
-                radial-gradient(2px 2px at 90% 60%, white, transparent),
-                radial-gradient(1px 1px at 33% 80%, white, transparent),
-                radial-gradient(1px 1px at 15% 90%, white, transparent);
-            background-size: 200% 200%;
-            animation: twinkle 5s ease-in-out infinite;
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) ease-in-out infinite;
+            animation-delay: var(--delay);
         }
         
-        .stars2 {
-            background-image: 
-                radial-gradient(1px 1px at 10% 20%, white, transparent),
-                radial-gradient(1px 1px at 40% 60%, white, transparent),
-                radial-gradient(1px 1px at 70% 30%, white, transparent),
-                radial-gradient(1px 1px at 25% 75%, white, transparent),
-                radial-gradient(1px 1px at 85% 85%, white, transparent);
-            background-size: 200% 200%;
-            animation: twinkle 7s ease-in-out infinite;
-            opacity: 0.5;
+        .star.small {
+            width: 1px;
+            height: 1px;
+            box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.3);
         }
         
-        .stars3 {
-            background-image: 
-                radial-gradient(1px 1px at 30% 10%, white, transparent),
-                radial-gradient(1px 1px at 65% 45%, white, transparent),
-                radial-gradient(1px 1px at 45% 85%, white, transparent),
-                radial-gradient(1px 1px at 75% 20%, white, transparent);
-            background-size: 200% 200%;
-            animation: twinkle 9s ease-in-out infinite;
-            opacity: 0.3;
+        .star.medium {
+            width: 2px;
+            height: 2px;
+            box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.4);
+        }
+        
+        .star.large {
+            width: 3px;
+            height: 3px;
+            box-shadow: 0 0 6px 3px rgba(255, 255, 255, 0.5);
+        }
+        
+        .star.golden {
+            background: #fbbf24;
+            box-shadow: 0 0 8px 4px rgba(251, 191, 36, 0.6);
+        }
+        
+        .star.blue {
+            background: #60a5fa;
+            box-shadow: 0 0 8px 4px rgba(96, 165, 250, 0.5);
         }
         
         @keyframes twinkle {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+            0%, 100% { 
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1.2);
+            }
         }
+        
+        /* Shooting stars */
+        .shooting-star {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, white, transparent);
+            opacity: 0;
+            animation: shoot 8s ease-in-out infinite;
+        }
+        
+        .shooting-star:nth-child(1) {
+            top: 20%;
+            left: 0;
+            animation-delay: 0s;
+        }
+        
+        .shooting-star:nth-child(2) {
+            top: 40%;
+            left: 20%;
+            animation-delay: 3s;
+        }
+        
+        .shooting-star:nth-child(3) {
+            top: 60%;
+            left: 40%;
+            animation-delay: 6s;
+        }
+        
+        @keyframes shoot {
+            0% {
+                opacity: 0;
+                transform: translateX(0) translateY(0) rotate(-45deg);
+            }
+            5% {
+                opacity: 1;
+            }
+            15% {
+                opacity: 0;
+                transform: translateX(300px) translateY(300px) rotate(-45deg);
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        
+        /* Nebula glow effects */
+        .nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: nebulaPulse 15s ease-in-out infinite;
+        }
+        
+        .nebula-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+            top: 10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+        
+        .nebula-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #f97316 0%, transparent 70%);
+            top: 50%;
+            right: -10%;
+            animation-delay: 5s;
+        }
+        
+        .nebula-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #0ea5e9 0%, transparent 70%);
+            bottom: 10%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+        
+        @keyframes nebulaPulse {
+            0%, 100% {
+                opacity: 0.1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.2;
+                transform: scale(1.1);
+            }
+        }
+        
+        /* Constellation lines */
+        .constellation {
+            position: absolute;
+            stroke: rgba(251, 191, 36, 0.3);
+            stroke-width: 1;
+            fill: none;
+            opacity: 0;
+            animation: constellationFade 20s ease-in-out infinite;
+        }
+        
+        @keyframes constellationFade {
+            0%, 80%, 100% { opacity: 0; }
+            40%, 60% { opacity: 0.4; }
+        }
+        
+        /* ========== END STARFIELD ========== */
         
         @keyframes fadeIn {
             from {
@@ -117,6 +237,7 @@
         
         .bg-cosmic {
             background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
+            position: relative;
         }
         
         .text-gradient {
@@ -127,14 +248,16 @@
         }
         
         .card {
-            background: linear-gradient(135deg, #1a1f3a 0%, #0a0e27 100%);
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.9) 0%, rgba(10, 14, 39, 0.9) 100%);
             border: 1px solid rgba(251, 191, 36, 0.2);
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
         
         .card:hover {
             border-color: rgba(251, 191, 36, 0.4);
             box-shadow: 0 10px 40px rgba(251, 191, 36, 0.1);
+            transform: translateY(-5px);
         }
         
         .btn-primary {
@@ -200,9 +323,78 @@
         #mobileMenu.show {
             display: block;
         }
+        
+        /* Project card special effects */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .project-card:hover::before {
+            left: 100%;
+        }
+        
+        .project-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover .project-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        /* Status badges */
+        .status-ongoing {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        
+        .status-completed {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .status-planned {
+            background: rgba(168, 85, 247, 0.2);
+            color: #a855f7;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+        
+        /* Section backgrounds for depth */
+        section {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 <body class="bg-cosmic text-white">
+
+    <!-- Enhanced Starfield Background -->
+    <div class="starfield-container" id="starfield">
+        <!-- Nebula effects -->
+        <div class="nebula nebula-1"></div>
+        <div class="nebula nebula-2"></div>
+        <div class="nebula nebula-3"></div>
+        
+        <!-- Shooting stars -->
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+        <div class="shooting-star"></div>
+        
+        <!-- Stars will be generated by JavaScript -->
+    </div>
 
     <!-- Header / Navigation -->
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
@@ -217,6 +409,7 @@
                     <a href="#home" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Home</a>
                     <a href="#about" class="nav-link text-sm font-medium text-gray-300 hover:text-white">About</a>
                     <a href="#education" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Education</a>
+                    <a href="#projects" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Projects</a>
                     <a href="#experience" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Experience</a>
                     <a href="#certifications" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Certifications</a>
                     <a href="#contact" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Contact</a>
@@ -233,6 +426,7 @@
                 <a href="#home" class="block text-sm font-medium text-gray-300">Home</a>
                 <a href="#about" class="block text-sm font-medium text-gray-300">About</a>
                 <a href="#education" class="block text-sm font-medium text-gray-300">Education</a>
+                <a href="#projects" class="block text-sm font-medium text-gray-300">Projects</a>
                 <a href="#experience" class="block text-sm font-medium text-gray-300">Experience</a>
                 <a href="#certifications" class="block text-sm font-medium text-gray-300">Certifications</a>
                 <a href="#contact" class="block text-sm font-medium text-gray-300">Contact</a>
@@ -242,12 +436,6 @@
 
     <!-- Hero Section -->
     <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="stars"></div>
-            <div class="stars2"></div>
-            <div class="stars3"></div>
-        </div>
-        
         <div class="container mx-auto px-6 py-20 relative z-10">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
                 <div class="flex-1 text-center lg:text-left space-y-6 animate-fade-in">
@@ -271,9 +459,9 @@
                             <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
                             Get in Touch
                         </a>
-                        <a href="#experience" class="btn-outline inline-flex items-center justify-center px-8 py-4 text-lg rounded-full font-medium">
-                            <i data-lucide="download" class="w-5 h-5 mr-2"></i>
-                            View Research
+                        <a href="#projects" class="btn-outline inline-flex items-center justify-center px-8 py-4 text-lg rounded-full font-medium">
+                            <i data-lucide="folder-open" class="w-5 h-5 mr-2"></i>
+                            View Projects
                         </a>
                     </div>
                 </div>
@@ -367,7 +555,7 @@
     </section>
 
     <!-- Education Section -->
-    <section id="education" class="py-24 px-6 relative" style="background: #0d1129;">
+    <section id="education" class="py-24 px-6 relative" style="background: rgba(13, 17, 41, 0.8);">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
                 <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Education</h2>
@@ -481,8 +669,176 @@
         </div>
     </section>
 
+    <!-- PROJECTS SECTION - NEW -->
+    <section id="projects" class="py-24 px-6 relative">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Research Projects</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded-full"></div>
+                <p class="text-gray-300 mt-6 max-w-2xl mx-auto">
+                    Exploring the frontiers of astrophysics through computational analysis and observational research
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project 1: Solar Prominence Analysis -->
+                <div class="card project-card p-8 rounded-lg">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="bg-amber-400/10 p-4 rounded-lg project-icon">
+                            <i data-lucide="sun" class="w-8 h-8 text-amber-400"></i>
+                        </div>
+                        <span class="status-ongoing px-3 py-1 rounded-full text-xs font-medium">Ongoing</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-3">Solar Prominence Plasma Flow Analysis</h3>
+                    <p class="text-gray-300 mb-4">
+                        Analysis of UV data from the EUI imager aboard ESA's Solar Orbiter probe. Developing Python-based pipelines
+                        to characterize plasma flows in solar prominences through time-series analysis of intensity variations.
+                    </p>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-sm font-semibold text-amber-400 mb-2">Key Objectives</h4>
+                        <ul class="text-sm text-gray-400 space-y-1">
+                            <li>• Measure velocity amplitude and direction of plasma flows</li>
+                            <li>• Quantify energy transport in prominence structures</li>
+                            <li>• Develop automated detection algorithms</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-xs">Python</span>
+                        <span class="skill-tag text-xs">SunPy</span>
+                        <span class="skill-tag text-xs">NumPy</span>
+                        <span class="skill-tag text-xs">Time Series</span>
+                        <span class="skill-tag text-xs">Solar Orbiter</span>
+                    </div>
+                </div>
+                
+                <!-- Project 2: Exoplanet Transit Detection -->
+                <div class="card project-card p-8 rounded-lg">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="bg-amber-400/10 p-4 rounded-lg project-icon">
+                            <i data-lucide="orbit" class="w-8 h-8 text-amber-400"></i>
+                        </div>
+                        <span class="status-completed px-3 py-1 rounded-full text-xs font-medium">Completed</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-3">Exoplanet Transit Light Curve Analysis</h3>
+                    <p class="text-gray-300 mb-4">
+                        Developed a Python pipeline for detecting and analyzing exoplanet transits using photometric data. 
+                        Applied Box Least Squares (BLS) algorithm to identify periodic dips in stellar brightness.
+                    </p>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-sm font-semibold text-amber-400 mb-2">Achievements</h4>
+                        <ul class="text-sm text-gray-400 space-y-1">
+                            <li>• Successfully detected known exoplanet transits</li>
+                            <li>• Estimated planetary radii from transit depth</li>
+                            <li>• Implemented noise reduction techniques</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-xs">Python</span>
+                        <span class="skill-tag text-xs">Lightkurve</span>
+                        <span class="skill-tag text-xs">Astropy</span>
+                        <span class="skill-tag text-xs">TESS Data</span>
+                        <span class="skill-tag text-xs">BLS Algorithm</span>
+                    </div>
+                </div>
+                
+                <!-- Project 3: Spectral Analysis -->
+                <div class="card project-card p-8 rounded-lg">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="bg-amber-400/10 p-4 rounded-lg project-icon">
+                            <i data-lucide="activity" class="w-8 h-8 text-amber-400"></i>
+                        </div>
+                        <span class="status-completed px-3 py-1 rounded-full text-xs font-medium">Completed</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-3">Stellar Classification via Spectroscopy</h3>
+                    <p class="text-gray-300 mb-4">
+                        Machine learning approach to stellar classification using spectroscopic data. Implemented 
+                        feature extraction from absorption lines to determine stellar temperature, metallicity, and surface gravity.
+                    </p>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-sm font-semibold text-amber-400 mb-2">Methods & Results</h4>
+                        <ul class="text-sm text-gray-400 space-y-1">
+                            <li>• Processed SDSS spectroscopic database</li>
+                            <li>• Achieved 94% accuracy in spectral type classification</li>
+                            <li>• Identified key diagnostic absorption features</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-xs">Python</span>
+                        <span class="skill-tag text-xs">Scikit-learn</span>
+                        <span class="skill-tag text-xs">Pandas</span>
+                        <span class="skill-tag text-xs">SDSS</span>
+                        <span class="skill-tag text-xs">ML Classification</span>
+                    </div>
+                </div>
+                
+                <!-- Project 4: Cosmic Ray Detection -->
+                <div class="card project-card p-8 rounded-lg">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="bg-amber-400/10 p-4 rounded-lg project-icon">
+                            <i data-lucide="zap" class="w-8 h-8 text-amber-400"></i>
+                        </div>
+                        <span class="status-planned px-3 py-1 rounded-full text-xs font-medium">Planned</span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold text-white mb-3">Cosmic Ray Muon Detection Study</h3>
+                    <p class="text-gray-300 mb-4">
+                        Upcoming project to study cosmic ray muon flux variations using scintillator detectors. 
+                        Will investigate correlations between muon rates and solar activity cycles.
+                    </p>
+                    
+                    <div class="mb-4">
+                        <h4 class="text-sm font-semibold text-amber-400 mb-2">Planned Objectives</h4>
+                        <ul class="text-sm text-gray-400 space-y-1">
+                            <li>• Build and calibrate muon detector array</li>
+                            <li>• Correlate flux with heliospheric conditions</li>
+                            <li>• Analyze seasonal and diurnal variations</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag text-xs">Particle Physics</span>
+                        <span class="skill-tag text-xs">Electronics</span>
+                        <span class="skill-tag text-xs">ROOT</span>
+                        <span class="skill-tag text-xs">Data Acquisition</span>
+                        <span class="skill-tag text-xs">Statistical Analysis</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- GitHub & Publications Link -->
+            <div class="mt-12 text-center">
+                <div class="card inline-flex items-center gap-6 p-6 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="github" class="w-6 h-6 text-amber-400"></i>
+                        <div class="text-left">
+                            <p class="text-sm text-gray-400">View Code</p>
+                            <p class="text-white font-semibold">GitHub Repository</p>
+                        </div>
+                    </div>
+                    <div class="w-px h-12 bg-amber-400/30"></div>
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="file-text" class="w-6 h-6 text-amber-400"></i>
+                        <div class="text-left">
+                            <p class="text-sm text-gray-400">Research Papers</p>
+                            <p class="text-white font-semibold">Coming Soon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Experience Section -->
-    <section id="experience" class="py-24 px-6 relative">
+    <section id="experience" class="py-24 px-6 relative" style="background: rgba(13, 17, 41, 0.8);">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
                 <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Research Experience</h2>
@@ -607,7 +963,7 @@
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications" class="py-24 px-6 relative" style="background: #0d1129;">
+    <section id="certifications" class="py-24 px-6 relative">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
                 <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Certifications & Achievements</h2>
@@ -743,7 +1099,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-24 px-6 relative">
+    <section id="contact" class="py-24 px-6 relative" style="background: rgba(13, 17, 41, 0.8);">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
                 <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Get in Touch</h2>
@@ -832,7 +1188,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-[#0a0e27] border-t border-amber-400/20 py-8 px-6">
+    <footer class="bg-[#0a0e27] border-t border-amber-400/20 py-8 px-6 relative z-10">
         <div class="container mx-auto max-w-6xl">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                 <div class="text-center md:text-left">
@@ -864,6 +1220,49 @@
         
         // Current year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // ========== ENHANCED STARFIELD GENERATOR ==========
+        function createStarfield() {
+            const starfield = document.getElementById('starfield');
+            const numStars = 150; // Number of stars
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random size
+                const sizeClass = Math.random();
+                if (sizeClass < 0.6) {
+                    star.classList.add('small');
+                } else if (sizeClass < 0.9) {
+                    star.classList.add('medium');
+                } else {
+                    star.classList.add('large');
+                }
+                
+                // Some colored stars
+                const colorRandom = Math.random();
+                if (colorRandom > 0.95) {
+                    star.classList.add('golden');
+                } else if (colorRandom > 0.90) {
+                    star.classList.add('blue');
+                }
+                
+                // Random position
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                
+                // Random animation duration and delay
+                star.style.setProperty('--duration', (3 + Math.random() * 7) + 's');
+                star.style.setProperty('--delay', (Math.random() * 5) + 's');
+                
+                starfield.appendChild(star);
+            }
+        }
+        
+        // Create starfield on load
+        createStarfield();
+        // ========== END STARFIELD GENERATOR ==========
         
         // Header scroll effect
         const header = document.getElementById('header');
