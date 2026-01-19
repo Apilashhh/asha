@@ -5,436 +5,163 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asha Balasureshwaran - Astrophysicist Portfolio</title>
     <meta name="description" content="Asha Balasureshwaran - Aspiring Astrophysicist | Physics & Earth Sciences Student at Université Paris-Saclay">
-    
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Crimson Text', Georgia, serif; }
         
-        html {
-            scroll-behavior: smooth;
-        }
+        .starfield-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+        .star { position: absolute; background: white; border-radius: 50%; animation: twinkle var(--duration) ease-in-out infinite; animation-delay: var(--delay); }
+        .star.small { width: 2px; height: 2px; box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.5); }
+        .star.medium { width: 4px; height: 4px; box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.6); }
+        .star.large { width: 5px; height: 5px; box-shadow: 0 0 18px 6px rgba(255, 255, 255, 0.7); }
+        .star.golden { background: #fbbf24; box-shadow: 0 0 20px 8px rgba(251, 191, 36, 0.7); }
+        .star.blue { background: #60a5fa; box-shadow: 0 0 20px 8px rgba(96, 165, 250, 0.6); }
+        .star.purple { background: #a78bfa; box-shadow: 0 0 20px 8px rgba(167, 139, 250, 0.6); }
         
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
-            overflow-x: hidden;
-        }
+        @keyframes twinkle { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.4); } }
         
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Crimson Text', Georgia, serif;
-        }
+        .shooting-star { position: absolute; width: 150px; height: 2px; background: linear-gradient(90deg, white, rgba(255,255,255,0.5), transparent); opacity: 0; animation: shoot 12s ease-in-out infinite; border-radius: 50%; }
+        .shooting-star::before { content: ''; position: absolute; width: 10px; height: 10px; background: white; border-radius: 50%; box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.9); left: 0; top: -4px; }
+        .shooting-star:nth-child(1) { top: 15%; left: -5%; animation-delay: 0s; }
+        .shooting-star:nth-child(2) { top: 40%; left: 15%; animation-delay: 5s; }
+        .shooting-star:nth-child(3) { top: 65%; left: 30%; animation-delay: 10s; }
+        @keyframes shoot { 0% { opacity: 0; transform: translateX(0) translateY(0) rotate(-45deg); } 2% { opacity: 1; } 10% { opacity: 0; transform: translateX(500px) translateY(500px) rotate(-45deg); } 100% { opacity: 0; } }
         
-        /* ========== ENHANCED STARFIELD EFFECT ========== */
-        .starfield-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
+        .nebula { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.12; animation: nebulaPulse 20s ease-in-out infinite; }
+        .nebula-1 { width: 700px; height: 700px; background: radial-gradient(circle, #8b5cf6 0%, transparent 70%); top: 5%; left: -15%; }
+        .nebula-2 { width: 600px; height: 600px; background: radial-gradient(circle, #f97316 0%, transparent 70%); top: 45%; right: -15%; animation-delay: 7s; }
+        .nebula-3 { width: 500px; height: 500px; background: radial-gradient(circle, #0ea5e9 0%, transparent 70%); bottom: 5%; left: 25%; animation-delay: 14s; }
+        @keyframes nebulaPulse { 0%, 100% { opacity: 0.08; transform: scale(1); } 50% { opacity: 0.18; transform: scale(1.1); } }
         
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle var(--duration) ease-in-out infinite;
-            animation-delay: var(--delay);
-        }
+        .solar-system-container { position: relative; width: 100%; height: 550px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .solar-system { position: relative; width: 100%; max-width: 950px; height: 500px; }
+        .sun { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 70px; height: 70px; background: radial-gradient(circle, #fff9c4 0%, #fbbf24 40%, #f97316 70%, #ea580c 100%); border-radius: 50%; box-shadow: 0 0 50px 20px rgba(251, 191, 36, 0.6), 0 0 100px 40px rgba(251, 191, 36, 0.3), 0 0 150px 60px rgba(251, 191, 36, 0.1); animation: sunPulse 4s ease-in-out infinite; cursor: pointer; z-index: 10; }
+        @keyframes sunPulse { 0%, 100% { box-shadow: 0 0 50px 20px rgba(251, 191, 36, 0.6), 0 0 100px 40px rgba(251, 191, 36, 0.3), 0 0 150px 60px rgba(251, 191, 36, 0.1); } 50% { box-shadow: 0 0 60px 25px rgba(251, 191, 36, 0.7), 0 0 120px 50px rgba(251, 191, 36, 0.4), 0 0 180px 70px rgba(251, 191, 36, 0.15); } }
         
-        .star.small {
-            width: 1px;
-            height: 1px;
-            box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.3);
-        }
+        .orbit { position: absolute; left: 50%; top: 50%; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 50%; transform: translate(-50%, -50%); }
+        .planet-container { position: absolute; left: 50%; top: 50%; transform-origin: center center; animation: orbit linear infinite; }
+        .planet { position: absolute; border-radius: 50%; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; transform: translate(-50%, -50%); }
+        .planet:hover { transform: translate(-50%, -50%) scale(1.5); z-index: 100; }
+        .planet-label { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); font-size: 11px; color: rgba(255, 255, 255, 0.8); white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity 0.3s ease; font-weight: 500; }
+        .planet:hover .planet-label { opacity: 1; }
         
-        .star.medium {
-            width: 2px;
-            height: 2px;
-            box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.4);
-        }
+        .mercury { width: 12px; height: 12px; background: linear-gradient(135deg, #9ca3af 0%, #6b7280 50%, #4b5563 100%); box-shadow: 0 0 12px 4px rgba(156, 163, 175, 0.6); }
+        .venus { width: 16px; height: 16px; background: linear-gradient(135deg, #fde68a 0%, #f59e0b 50%, #d97706 100%); box-shadow: 0 0 15px 5px rgba(245, 158, 11, 0.6); }
+        .earth { width: 17px; height: 17px; background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 30%, #22c55e 60%, #16a34a 100%); box-shadow: 0 0 18px 6px rgba(59, 130, 246, 0.7); }
+        .mars { width: 14px; height: 14px; background: linear-gradient(135deg, #fca5a5 0%, #ef4444 50%, #b91c1c 100%); box-shadow: 0 0 14px 5px rgba(239, 68, 68, 0.6); }
+        .jupiter { width: 32px; height: 32px; background: linear-gradient(135deg, #fde68a 0%, #d97706 25%, #92400e 50%, #fbbf24 75%, #b45309 100%); box-shadow: 0 0 25px 8px rgba(217, 119, 6, 0.6); }
+        .saturn { width: 28px; height: 28px; background: linear-gradient(135deg, #fef3c7 0%, #fcd34d 50%, #b45309 100%); box-shadow: 0 0 22px 7px rgba(252, 211, 77, 0.6); }
+        .saturn::after { content: ''; position: absolute; width: 50px; height: 12px; border: 2px solid rgba(252, 211, 77, 0.7); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%) rotateX(70deg); }
+        .uranus { width: 22px; height: 22px; background: linear-gradient(135deg, #a5f3fc 0%, #22d3ee 50%, #0891b2 100%); box-shadow: 0 0 18px 6px rgba(34, 211, 238, 0.6); }
+        .neptune { width: 20px; height: 20px; background: linear-gradient(135deg, #818cf8 0%, #4f46e5 50%, #3730a3 100%); box-shadow: 0 0 18px 6px rgba(79, 70, 229, 0.6); }
+        @keyframes orbit { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
         
-        .star.large {
-            width: 3px;
-            height: 3px;
-            box-shadow: 0 0 6px 3px rgba(255, 255, 255, 0.5);
-        }
+        .planet-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 14, 39, 0.97); backdrop-filter: blur(25px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .planet-modal.active { display: flex; animation: modalFadeIn 0.4s ease; }
+        @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal-content { background: linear-gradient(135deg, rgba(26, 31, 58, 0.98) 0%, rgba(10, 14, 39, 0.99) 100%); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 24px; max-width: 550px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 40px; position: relative; animation: modalSlideIn 0.5s ease; }
+        @keyframes modalSlideIn { from { opacity: 0; transform: scale(0.8) translateY(50px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .modal-close { position: absolute; top: 20px; right: 20px; width: 44px; height: 44px; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 50%; color: #fbbf24; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .modal-close:hover { background: rgba(251, 191, 36, 0.3); transform: rotate(90deg); }
+        .modal-planet-visual { width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 30px; animation: planetFloat 4s ease-in-out infinite; }
+        @keyframes planetFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .planet-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 20px 0; }
+        .stat-item { background: rgba(251, 191, 36, 0.05); border: 1px solid rgba(251, 191, 36, 0.15); border-radius: 12px; padding: 14px; text-align: center; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; color: #fbbf24; }
+        .stat-label { font-size: 0.7rem; color: #9ca3af; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .fun-fact-box { background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 16px; padding: 20px; margin-top: 20px; }
+        .fun-fact-title { display: flex; align-items: center; gap: 10px; font-weight: 600; color: #fbbf24; margin-bottom: 10px; font-size: 1rem; }
         
-        .star.golden {
-            background: #fbbf24;
-            box-shadow: 0 0 8px 4px rgba(251, 191, 36, 0.6);
-        }
-        
-        .star.blue {
-            background: #60a5fa;
-            box-shadow: 0 0 8px 4px rgba(96, 165, 250, 0.5);
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { 
-                opacity: 0.3;
-                transform: scale(1);
-            }
-            50% { 
-                opacity: 1;
-                transform: scale(1.2);
-            }
-        }
-        
-        /* Shooting stars */
-        .shooting-star {
-            position: absolute;
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, white, transparent);
-            opacity: 0;
-            animation: shoot 8s ease-in-out infinite;
-        }
-        
-        .shooting-star:nth-child(1) {
-            top: 20%;
-            left: 0;
-            animation-delay: 0s;
-        }
-        
-        .shooting-star:nth-child(2) {
-            top: 40%;
-            left: 20%;
-            animation-delay: 3s;
-        }
-        
-        .shooting-star:nth-child(3) {
-            top: 60%;
-            left: 40%;
-            animation-delay: 6s;
-        }
-        
-        @keyframes shoot {
-            0% {
-                opacity: 0;
-                transform: translateX(0) translateY(0) rotate(-45deg);
-            }
-            5% {
-                opacity: 1;
-            }
-            15% {
-                opacity: 0;
-                transform: translateX(300px) translateY(300px) rotate(-45deg);
-            }
-            100% {
-                opacity: 0;
-            }
-        }
-        
-        /* Nebula glow effects */
-        .nebula {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.15;
-            animation: nebulaPulse 15s ease-in-out infinite;
-        }
-        
-        .nebula-1 {
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
-            top: 10%;
-            left: -10%;
-            animation-delay: 0s;
-        }
-        
-        .nebula-2 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, #f97316 0%, transparent 70%);
-            top: 50%;
-            right: -10%;
-            animation-delay: 5s;
-        }
-        
-        .nebula-3 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, #0ea5e9 0%, transparent 70%);
-            bottom: 10%;
-            left: 30%;
-            animation-delay: 10s;
-        }
-        
-        @keyframes nebulaPulse {
-            0%, 100% {
-                opacity: 0.1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.2;
-                transform: scale(1.1);
-            }
-        }
-        
-        /* Constellation lines */
-        .constellation {
-            position: absolute;
-            stroke: rgba(251, 191, 36, 0.3);
-            stroke-width: 1;
-            fill: none;
-            opacity: 0;
-            animation: constellationFade 20s ease-in-out infinite;
-        }
-        
-        @keyframes constellationFade {
-            0%, 80%, 100% { opacity: 0; }
-            40%, 60% { opacity: 0.4; }
-        }
-        
-        /* ========== END STARFIELD ========== */
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .animate-fade-in {
-            animation: fadeIn 1s ease-out;
-        }
-        
-        .animate-fade-in-up {
-            animation: fadeInUp 1s ease-out 0.3s backwards;
-        }
-        
-        .bg-cosmic {
-            background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
-            position: relative;
-        }
-        
-        .text-gradient {
-            background: linear-gradient(90deg, #fbbf24, #f97316);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .card {
-            background: linear-gradient(135deg, rgba(26, 31, 58, 0.9) 0%, rgba(10, 14, 39, 0.9) 100%);
-            border: 1px solid rgba(251, 191, 36, 0.2);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        
-        .card:hover {
-            border-color: rgba(251, 191, 36, 0.4);
-            box-shadow: 0 10px 40px rgba(251, 191, 36, 0.1);
-            transform: translateY(-5px);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(90deg, #fbbf24, #f97316);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 40px rgba(251, 191, 36, 0.5);
-        }
-        
-        .btn-outline {
-            border: 2px solid #fbbf24;
-            color: #fbbf24;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-outline:hover {
-            background: #fbbf24;
-            color: #0a0e27;
-            transform: scale(1.05);
-        }
-        
-        .skill-tag {
-            background: rgba(251, 191, 36, 0.1);
-            border: 1px solid rgba(251, 191, 36, 0.3);
-            color: #fbbf24;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            transition: all 0.2s ease;
-        }
-        
-        .skill-tag:hover {
-            background: rgba(251, 191, 36, 0.2);
-            color: white;
-        }
-        
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-link.active {
-            color: #fbbf24;
-        }
-        
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #fbbf24, #f97316);
-        }
-        
-        #mobileMenu {
-            display: none;
-        }
-        
-        #mobileMenu.show {
-            display: block;
-        }
-        
-        /* Project card special effects */
-        .project-card {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .project-card:hover::before {
-            left: 100%;
-        }
-        
-        .project-icon {
-            transition: transform 0.3s ease;
-        }
-        
-        .project-card:hover .project-icon {
-            transform: rotate(10deg) scale(1.1);
-        }
-        
-        /* Status badges */
-        .status-ongoing {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22c55e;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-        
-        .status-completed {
-            background: rgba(59, 130, 246, 0.2);
-            color: #3b82f6;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-        
-        .status-planned {
-            background: rgba(168, 85, 247, 0.2);
-            color: #a855f7;
-            border: 1px solid rgba(168, 85, 247, 0.3);
-        }
-        
-        /* Section backgrounds for depth */
-        section {
-            position: relative;
-            z-index: 1;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 1s ease-out; }
+        .animate-fade-in-up { animation: fadeInUp 1s ease-out 0.3s backwards; }
+        .bg-cosmic { background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%); position: relative; }
+        .text-gradient { background: linear-gradient(90deg, #fbbf24, #f97316); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .card { background: linear-gradient(135deg, rgba(26, 31, 58, 0.9) 0%, rgba(10, 14, 39, 0.9) 100%); border: 1px solid rgba(251, 191, 36, 0.2); transition: all 0.3s ease; backdrop-filter: blur(10px); }
+        .card:hover { border-color: rgba(251, 191, 36, 0.4); box-shadow: 0 10px 40px rgba(251, 191, 36, 0.1); transform: translateY(-5px); }
+        .btn-primary { background: linear-gradient(90deg, #fbbf24, #f97316); transition: all 0.3s ease; }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 10px 40px rgba(251, 191, 36, 0.5); }
+        .btn-outline { border: 2px solid #fbbf24; color: #fbbf24; transition: all 0.3s ease; }
+        .btn-outline:hover { background: #fbbf24; color: #0a0e27; transform: scale(1.05); }
+        .skill-tag { background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.3); color: #fbbf24; padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem; transition: all 0.2s ease; }
+        .skill-tag:hover { background: rgba(251, 191, 36, 0.2); color: white; }
+        .nav-link { position: relative; transition: color 0.3s ease; }
+        .nav-link.active { color: #fbbf24; }
+        .nav-link.active::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #fbbf24, #f97316); }
+        #mobileMenu { display: none; }
+        #mobileMenu.show { display: block; }
+        .project-card { position: relative; overflow: hidden; }
+        .project-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.1), transparent); transition: left 0.5s ease; }
+        .project-card:hover::before { left: 100%; }
+        .project-icon { transition: transform 0.3s ease; }
+        .project-card:hover .project-icon { transform: rotate(10deg) scale(1.1); }
+        .status-ongoing { background: rgba(34, 197, 94, 0.2); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); }
+        .status-completed { background: rgba(59, 130, 246, 0.2); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .status-planned { background: rgba(168, 85, 247, 0.2); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.3); }
+        section { position: relative; z-index: 1; }
+        @media (max-width: 768px) { .solar-system-container { height: 400px; } .solar-system { transform: scale(0.6); } }
     </style>
 </head>
 <body class="bg-cosmic text-white">
-
-    <!-- Enhanced Starfield Background -->
     <div class="starfield-container" id="starfield">
-        <!-- Nebula effects -->
         <div class="nebula nebula-1"></div>
         <div class="nebula nebula-2"></div>
         <div class="nebula nebula-3"></div>
-        
-        <!-- Shooting stars -->
         <div class="shooting-star"></div>
         <div class="shooting-star"></div>
         <div class="shooting-star"></div>
-        
-        <!-- Stars will be generated by JavaScript -->
     </div>
 
-    <!-- Header / Navigation -->
+    <div class="planet-modal" id="planetModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closePlanetModal()">✕</button>
+            <div class="modal-planet-visual" id="modalPlanetVisual"></div>
+            <h3 class="text-3xl font-bold text-center mb-2" id="modalPlanetName"></h3>
+            <p class="text-amber-400 text-center text-sm mb-4" id="modalPlanetType"></p>
+            <p class="text-gray-300 leading-relaxed text-sm" id="modalPlanetDescription"></p>
+            <div class="planet-stats" id="modalPlanetStats"></div>
+            <div class="fun-fact-box">
+                <div class="fun-fact-title"><span>🎉</span><span>Fun Fact</span></div>
+                <p class="text-gray-300 text-sm" id="modalFunFact"></p>
+            </div>
+        </div>
+    </div>
+
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <div class="text-2xl font-bold text-gradient">
-                    Asha B.
-                </div>
-                
-                <!-- Desktop Navigation -->
+                <div class="text-2xl font-bold text-gradient">Asha B.</div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#home" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Home</a>
                     <a href="#about" class="nav-link text-sm font-medium text-gray-300 hover:text-white">About</a>
+                    <a href="#solar-system" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Solar System</a>
                     <a href="#education" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Education</a>
                     <a href="#projects" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Projects</a>
                     <a href="#experience" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Experience</a>
-                    <a href="#certifications" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Certifications</a>
                     <a href="#contact" class="nav-link text-sm font-medium text-gray-300 hover:text-white">Contact</a>
                 </div>
-                
-                <!-- Mobile Menu Button -->
-                <button id="mobileMenuBtn" class="md:hidden text-white">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
+                <button id="mobileMenuBtn" class="md:hidden text-white"><i data-lucide="menu" class="w-6 h-6"></i></button>
             </div>
-            
-            <!-- Mobile Navigation -->
             <div id="mobileMenu" class="md:hidden mt-4 pb-4 space-y-4 border-t border-gray-700 pt-4">
                 <a href="#home" class="block text-sm font-medium text-gray-300">Home</a>
                 <a href="#about" class="block text-sm font-medium text-gray-300">About</a>
+                <a href="#solar-system" class="block text-sm font-medium text-gray-300">Solar System</a>
                 <a href="#education" class="block text-sm font-medium text-gray-300">Education</a>
                 <a href="#projects" class="block text-sm font-medium text-gray-300">Projects</a>
                 <a href="#experience" class="block text-sm font-medium text-gray-300">Experience</a>
-                <a href="#certifications" class="block text-sm font-medium text-gray-300">Certifications</a>
                 <a href="#contact" class="block text-sm font-medium text-gray-300">Contact</a>
             </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div class="container mx-auto px-6 py-20 relative z-10">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
@@ -443,29 +170,16 @@
                         <i data-lucide="sparkles" class="w-4 h-4 text-amber-400"></i>
                         <span class="text-sm text-amber-400">Aspiring Astrophysicist</span>
                     </div>
-                    
                     <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
                         <span class="block text-white">Asha</span>
                         <span class="block text-gradient">Balasureshwaran</span>
                     </h1>
-                    
-                    <p class="text-xl text-gray-300 max-w-2xl">
-                        Physics & Earth Sciences Student at Paris-Saclay University, specializing in Astrophysics.
-                        Passionate about unraveling the mysteries of the cosmos through data analysis and research.
-                    </p>
-                    
+                    <p class="text-xl text-gray-300 max-w-2xl">Physics & Earth Sciences Student at Paris-Saclay University, specializing in Astrophysics. Passionate about unraveling the mysteries of the cosmos through data analysis and research.</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#contact" class="btn-primary inline-flex items-center justify-center px-8 py-4 text-lg text-white rounded-full font-medium">
-                            <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
-                            Get in Touch
-                        </a>
-                        <a href="#projects" class="btn-outline inline-flex items-center justify-center px-8 py-4 text-lg rounded-full font-medium">
-                            <i data-lucide="folder-open" class="w-5 h-5 mr-2"></i>
-                            View Projects
-                        </a>
+                        <a href="#contact" class="btn-primary inline-flex items-center justify-center px-8 py-4 text-lg text-white rounded-full font-medium"><i data-lucide="mail" class="w-5 h-5 mr-2"></i>Get in Touch</a>
+                        <a href="#solar-system" class="btn-outline inline-flex items-center justify-center px-8 py-4 text-lg rounded-full font-medium"><i data-lucide="orbit" class="w-5 h-5 mr-2"></i>Explore Planets</a>
                     </div>
                 </div>
-                
                 <div class="flex-1 flex justify-center lg:justify-end animate-fade-in-up">
                     <div class="relative group">
                         <div class="absolute -inset-1 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full blur-xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
@@ -480,71 +194,37 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="py-24 px-6 relative">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
                 <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">About Me</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded-full"></div>
             </div>
-            
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6">
-                    <p class="text-lg text-gray-300 leading-relaxed">
-                        I am a dedicated physics student at <span class="text-amber-400 font-semibold">Université Paris-Saclay</span>,
-                        one of the world's leading institutions for scientific research. My academic journey focuses on the
-                        intersection of physics and Earth sciences, with a specialized focus on astrophysics.
-                    </p>
-                    <p class="text-lg text-gray-300 leading-relaxed">
-                        Through my research experience at the <span class="text-amber-400 font-semibold">Institut d'Astrophysique Spatiale</span>,
-                        I've developed expertise in analyzing UV data from solar observations, working with advanced tools in Python
-                        to understand the dynamic processes occurring in our Sun.
-                    </p>
-                    <p class="text-lg text-gray-300 leading-relaxed">
-                        Beyond academics, I am passionate about cultural heritage, having achieved the highest honors in Tamil language
-                        studies and earned my 1st DAN in Taekwondo, demonstrating my commitment to discipline and continuous growth.
-                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">I am a dedicated physics student at <span class="text-amber-400 font-semibold">Université Paris-Saclay</span>, one of the world's leading institutions for scientific research. My academic journey focuses on the intersection of physics and Earth sciences, with a specialized focus on astrophysics.</p>
+                    <p class="text-lg text-gray-300 leading-relaxed">Through my research experience at the <span class="text-amber-400 font-semibold">Institut d'Astrophysique Spatiale</span>, I've developed expertise in analyzing UV data from solar observations, working with advanced tools in Python to understand the dynamic processes occurring in our Sun.</p>
+                    <p class="text-lg text-gray-300 leading-relaxed">Beyond academics, I am passionate about cultural heritage, having achieved the highest honors in Tamil language studies and earned my 1st DAN in Taekwondo, demonstrating my commitment to discipline and continuous growth.</p>
                 </div>
-                
                 <div class="space-y-6">
                     <div class="card p-6 rounded-lg">
                         <div class="flex items-start gap-4">
-                            <div class="bg-amber-400/10 p-3 rounded-lg">
-                                <i data-lucide="target" class="w-6 h-6 text-amber-400"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-white mb-2">Research Focus</h3>
-                                <p class="text-gray-300">Solar physics, UV data analysis, plasma dynamics, and time-series analysis of astronomical phenomena</p>
-                            </div>
+                            <div class="bg-amber-400/10 p-3 rounded-lg"><i data-lucide="target" class="w-6 h-6 text-amber-400"></i></div>
+                            <div><h3 class="text-xl font-semibold text-white mb-2">Research Focus</h3><p class="text-gray-300">Solar physics, UV data analysis, plasma dynamics, and time-series analysis of astronomical phenomena</p></div>
                         </div>
                     </div>
-                    
                     <div class="card p-6 rounded-lg">
                         <div class="flex items-start gap-4">
-                            <div class="bg-amber-400/10 p-3 rounded-lg">
-                                <i data-lucide="heart" class="w-6 h-6 text-amber-400"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-white mb-2">Passions</h3>
-                                <p class="text-gray-300">Exploring the cosmos, data visualization, Tamil culture and theater, Taekwondo martial arts</p>
-                            </div>
+                            <div class="bg-amber-400/10 p-3 rounded-lg"><i data-lucide="heart" class="w-6 h-6 text-amber-400"></i></div>
+                            <div><h3 class="text-xl font-semibold text-white mb-2">Passions</h3><p class="text-gray-300">Exploring the cosmos, data visualization, Tamil culture and theater, Taekwondo martial arts</p></div>
                         </div>
                     </div>
-                    
                     <div class="card p-6 rounded-lg">
                         <div class="flex items-start gap-4">
-                            <div class="bg-amber-400/10 p-3 rounded-lg">
-                                <i data-lucide="user" class="w-6 h-6 text-amber-400"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-white mb-2">Skills</h3>
+                            <div class="bg-amber-400/10 p-3 rounded-lg"><i data-lucide="user" class="w-6 h-6 text-amber-400"></i></div>
+                            <div><h3 class="text-xl font-semibold text-white mb-2">Skills</h3>
                                 <div class="flex flex-wrap gap-2 mt-3">
-                                    <span class="skill-tag">Python</span>
-                                    <span class="skill-tag">MATLAB</span>
-                                    <span class="skill-tag">UV Imaging</span>
-                                    <span class="skill-tag">Data Analysis</span>
-                                    <span class="skill-tag">Research</span>
-                                    <span class="skill-tag">LaTeX</span>
+                                    <span class="skill-tag">Python</span><span class="skill-tag">MATLAB</span><span class="skill-tag">UV Imaging</span><span class="skill-tag">Data Analysis</span><span class="skill-tag">Research</span><span class="skill-tag">LaTeX</span>
                                 </div>
                             </div>
                         </div>
@@ -554,114 +234,85 @@
         </div>
     </section>
 
-    <!-- Education Section -->
-    <section id="education" class="py-24 px-6 relative" style="background: rgba(13, 17, 41, 0.8);">
+    <section id="solar-system" class="py-24 px-6 relative" style="background: rgba(13, 17, 41, 0.8);">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Our Solar System</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded-full mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">Click on any planet to discover fascinating scientific facts and fun trivia about our cosmic neighbors</p>
+            </div>
+            <div class="solar-system-container">
+                <div class="solar-system">
+                    <div class="sun" onclick="openPlanetModal('sun')"></div>
+                    <div class="orbit" style="width: 110px; height: 110px;"></div>
+                    <div class="planet-container" style="width: 110px; height: 110px; animation-duration: 8s;"><div class="planet mercury" style="left: 100%; top: 50%;" onclick="openPlanetModal('mercury')"><span class="planet-label">Mercury</span></div></div>
+                    <div class="orbit" style="width: 155px; height: 155px;"></div>
+                    <div class="planet-container" style="width: 155px; height: 155px; animation-duration: 12s;"><div class="planet venus" style="left: 100%; top: 50%;" onclick="openPlanetModal('venus')"><span class="planet-label">Venus</span></div></div>
+                    <div class="orbit" style="width: 205px; height: 205px;"></div>
+                    <div class="planet-container" style="width: 205px; height: 205px; animation-duration: 18s;"><div class="planet earth" style="left: 100%; top: 50%;" onclick="openPlanetModal('earth')"><span class="planet-label">Earth</span></div></div>
+                    <div class="orbit" style="width: 260px; height: 260px;"></div>
+                    <div class="planet-container" style="width: 260px; height: 260px; animation-duration: 25s;"><div class="planet mars" style="left: 100%; top: 50%;" onclick="openPlanetModal('mars')"><span class="planet-label">Mars</span></div></div>
+                    <div class="orbit" style="width: 350px; height: 350px;"></div>
+                    <div class="planet-container" style="width: 350px; height: 350px; animation-duration: 45s;"><div class="planet jupiter" style="left: 100%; top: 50%;" onclick="openPlanetModal('jupiter')"><span class="planet-label">Jupiter</span></div></div>
+                    <div class="orbit" style="width: 440px; height: 440px;"></div>
+                    <div class="planet-container" style="width: 440px; height: 440px; animation-duration: 60s;"><div class="planet saturn" style="left: 100%; top: 50%;" onclick="openPlanetModal('saturn')"><span class="planet-label">Saturn</span></div></div>
+                    <div class="orbit" style="width: 520px; height: 520px;"></div>
+                    <div class="planet-container" style="width: 520px; height: 520px; animation-duration: 80s;"><div class="planet uranus" style="left: 100%; top: 50%;" onclick="openPlanetModal('uranus')"><span class="planet-label">Uranus</span></div></div>
+                    <div class="orbit" style="width: 600px; height: 600px;"></div>
+                    <div class="planet-container" style="width: 600px; height: 600px; animation-duration: 100s;"><div class="planet neptune" style="left: 100%; top: 50%;" onclick="openPlanetModal('neptune')"><span class="planet-label">Neptune</span></div></div>
+                </div>
+            </div>
+            <div class="text-center mt-8"><p class="text-gray-400 text-sm">🖱️ Click on any celestial body to learn more</p></div>
+        </div>
+    </section>
+
+    <section id="education" class="py-24 px-6 relative">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
                 <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Education</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded-full"></div>
             </div>
-            
             <div class="space-y-8">
-                <!-- Paris-Saclay -->
                 <div class="card p-8 rounded-lg">
                     <div class="flex flex-col md:flex-row gap-6">
-                        <div class="bg-amber-400/10 p-4 rounded-lg h-fit">
-                            <i data-lucide="graduation-cap" class="w-10 h-10 text-amber-400"></i>
-                        </div>
-                        
+                        <div class="bg-amber-400/10 p-4 rounded-lg h-fit"><i data-lucide="graduation-cap" class="w-10 h-10 text-amber-400"></i></div>
                         <div class="flex-1 space-y-4">
                             <div>
                                 <h3 class="text-2xl font-bold text-white mb-2">Université Paris-Saclay</h3>
                                 <p class="text-xl text-amber-400 mb-1">Double-Bachelor's Degree in Physics and Earth Sciences</p>
                                 <p class="text-gray-300 mb-2">Astrophysics Option</p>
-                                <div class="flex items-center gap-2 text-gray-400">
-                                    <i data-lucide="book-open" class="w-4 h-4"></i>
-                                    <span>2023 - Present</span>
-                                </div>
+                                <div class="flex items-center gap-2 text-gray-400"><i data-lucide="book-open" class="w-4 h-4"></i><span>2023 - Present</span></div>
                             </div>
-                            
                             <div>
                                 <h4 class="text-lg font-semibold text-white mb-2">Highlights</h4>
                                 <ul class="space-y-2">
-                                    <li class="flex items-start gap-2 text-gray-300">
-                                        <span class="text-amber-400 mt-1">•</span>
-                                        <span>1st Mathematics University in the World (3rd consecutive time)</span>
-                                    </li>
-                                    <li class="flex items-start gap-2 text-gray-300">
-                                        <span class="text-amber-400 mt-1">•</span>
-                                        <span>12th Ranked University worldwide (Shanghai Rankings)</span>
-                                    </li>
-                                    <li class="flex items-start gap-2 text-gray-300">
-                                        <span class="text-amber-400 mt-1">•</span>
-                                        <span>1st University in Physics in France, 9th in the World</span>
-                                    </li>
-                                    <li class="flex items-start gap-2 text-gray-300">
-                                        <span class="text-amber-400 mt-1">•</span>
-                                        <span>19th in Natural Sciences worldwide</span>
-                                    </li>
+                                    <li class="flex items-start gap-2 text-gray-300"><span class="text-amber-400 mt-1">•</span><span>1st Mathematics University in the World (3rd consecutive time)</span></li>
+                                    <li class="flex items-start gap-2 text-gray-300"><span class="text-amber-400 mt-1">•</span><span>12th Ranked University worldwide (Shanghai Rankings)</span></li>
+                                    <li class="flex items-start gap-2 text-gray-300"><span class="text-amber-400 mt-1">•</span><span>1st University in Physics in France, 9th in the World</span></li>
                                 </ul>
                             </div>
-                            
                             <div>
                                 <h4 class="text-lg font-semibold text-white mb-3">Relevant Courses</h4>
                                 <div class="flex flex-wrap gap-2">
-                                    <span class="skill-tag">Applied Mathematics</span>
-                                    <span class="skill-tag">Atoms, Molecules, Solid State</span>
-                                    <span class="skill-tag">Geometric Optics</span>
-                                    <span class="skill-tag">Mechanics & Electromagnetism</span>
-                                    <span class="skill-tag">Transformations of Matter</span>
-                                    <span class="skill-tag">Linear Algebra</span>
-                                    <span class="skill-tag">Measurements in Geosciences</span>
-                                    <span class="skill-tag">Earth System</span>
+                                    <span class="skill-tag">Applied Mathematics</span><span class="skill-tag">Geometric Optics</span><span class="skill-tag">Mechanics & Electromagnetism</span><span class="skill-tag">Linear Algebra</span><span class="skill-tag">Earth System</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Tamil Education -->
                 <div class="card p-8 rounded-lg">
                     <div class="flex flex-col md:flex-row gap-6">
-                        <div class="bg-amber-400/10 p-4 rounded-lg h-fit">
-                            <i data-lucide="graduation-cap" class="w-10 h-10 text-amber-400"></i>
-                        </div>
-                        
+                        <div class="bg-amber-400/10 p-4 rounded-lg h-fit"><i data-lucide="graduation-cap" class="w-10 h-10 text-amber-400"></i></div>
                         <div class="flex-1 space-y-4">
                             <div>
                                 <h3 class="text-2xl font-bold text-white mb-2">Tamil Education Development Council</h3>
                                 <p class="text-xl text-amber-400 mb-1">International Examination Tamil</p>
-                                <p class="text-gray-300 mb-2">Tamil Language & Literature</p>
-                                <div class="flex items-center gap-2 text-gray-400">
-                                    <i data-lucide="book-open" class="w-4 h-4"></i>
-                                    <span>2011 - 2024</span>
-                                    <span class="mx-2">•</span>
-                                    <i data-lucide="award" class="w-4 h-4 text-amber-400"></i>
-                                    <span class="text-amber-400">Highest Honors</span>
-                                </div>
+                                <div class="flex items-center gap-2 text-gray-400"><i data-lucide="book-open" class="w-4 h-4"></i><span>2011 - 2024</span><span class="mx-2">•</span><i data-lucide="award" class="w-4 h-4 text-amber-400"></i><span class="text-amber-400">Highest Honors</span></div>
                             </div>
-                            
-                            <div>
-                                <h4 class="text-lg font-semibold text-white mb-2">Highlights</h4>
-                                <ul class="space-y-2">
-                                    <li class="flex items-start gap-2 text-gray-300">
-                                        <span class="text-amber-400 mt-1">•</span>
-                                        <span>First place in regional eloquence competitions (multiple years)</span>
-                                    </li>
-                                    <li class="flex items-start gap-2 text-gray-300">
-                                        <span class="text-amber-400 mt-1">•</span>
-                                        <span>Top position in Tamil Exams consistently</span>
-                                    </li>
-                                    <li class="flex items-start gap-2 text-gray-300">
-                                        <span class="text-amber-400 mt-1">•</span>
-                                        <span>Participation in Tamil Schools Olympic Games (3x First Place + Trophy)</span>
-                                    </li>
-                                    <li class="flex items-start gap-2 text-gray-300">
-                                        <span class="text-amber-400 mt-1">•</span>
-                                        <span>Active participation in Tamil theater productions</span>
-                                    </li>
-                                </ul>
-                            </div>
+                            <ul class="space-y-2">
+                                <li class="flex items-start gap-2 text-gray-300"><span class="text-amber-400 mt-1">•</span><span>First place in regional eloquence competitions (multiple years)</span></li>
+                                <li class="flex items-start gap-2 text-gray-300"><span class="text-amber-400 mt-1">•</span><span>Tamil Schools Olympic Games (3x First Place + Trophy)</span></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -669,673 +320,275 @@
         </div>
     </section>
 
-    <!-- PROJECTS SECTION - NEW -->
-    <section id="projects" class="py-24 px-6 relative">
+    <section id="projects" class="py-24 px-6 relative" style="background: rgba(13, 17, 41, 0.8);">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
                 <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Research Projects</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded-full"></div>
-                <p class="text-gray-300 mt-6 max-w-2xl mx-auto">
-                    Exploring the frontiers of astrophysics through computational analysis and observational research
-                </p>
+                <p class="text-gray-300 mt-6 max-w-2xl mx-auto">Exploring the frontiers of astrophysics through computational analysis and observational research</p>
             </div>
-            
             <div class="grid md:grid-cols-2 gap-8">
-                <!-- Project 1: Solar Prominence Analysis -->
                 <div class="card project-card p-8 rounded-lg">
                     <div class="flex items-start justify-between mb-4">
-                        <div class="bg-amber-400/10 p-4 rounded-lg project-icon">
-                            <i data-lucide="sun" class="w-8 h-8 text-amber-400"></i>
-                        </div>
+                        <div class="bg-amber-400/10 p-4 rounded-lg project-icon"><i data-lucide="sun" class="w-8 h-8 text-amber-400"></i></div>
                         <span class="status-ongoing px-3 py-1 rounded-full text-xs font-medium">Ongoing</span>
                     </div>
-                    
                     <h3 class="text-2xl font-bold text-white mb-3">Solar Prominence Plasma Flow Analysis</h3>
-                    <p class="text-gray-300 mb-4">
-                        Analysis of UV data from the EUI imager aboard ESA's Solar Orbiter probe. Developing Python-based pipelines
-                        to characterize plasma flows in solar prominences through time-series analysis of intensity variations.
-                    </p>
-                    
-                    <div class="mb-4">
-                        <h4 class="text-sm font-semibold text-amber-400 mb-2">Key Objectives</h4>
-                        <ul class="text-sm text-gray-400 space-y-1">
-                            <li>• Measure velocity amplitude and direction of plasma flows</li>
-                            <li>• Quantify energy transport in prominence structures</li>
-                            <li>• Develop automated detection algorithms</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag text-xs">Python</span>
-                        <span class="skill-tag text-xs">SunPy</span>
-                        <span class="skill-tag text-xs">NumPy</span>
-                        <span class="skill-tag text-xs">Time Series</span>
-                        <span class="skill-tag text-xs">Solar Orbiter</span>
-                    </div>
+                    <p class="text-gray-300 mb-4">Analysis of UV data from the EUI imager aboard ESA's Solar Orbiter probe. Developing Python-based pipelines to characterize plasma flows in solar prominences.</p>
+                    <div class="flex flex-wrap gap-2"><span class="skill-tag text-xs">Python</span><span class="skill-tag text-xs">SunPy</span><span class="skill-tag text-xs">Solar Orbiter</span></div>
                 </div>
-                
-                <!-- Project 2: Exoplanet Transit Detection -->
                 <div class="card project-card p-8 rounded-lg">
                     <div class="flex items-start justify-between mb-4">
-                        <div class="bg-amber-400/10 p-4 rounded-lg project-icon">
-                            <i data-lucide="orbit" class="w-8 h-8 text-amber-400"></i>
-                        </div>
+                        <div class="bg-amber-400/10 p-4 rounded-lg project-icon"><i data-lucide="orbit" class="w-8 h-8 text-amber-400"></i></div>
                         <span class="status-completed px-3 py-1 rounded-full text-xs font-medium">Completed</span>
                     </div>
-                    
                     <h3 class="text-2xl font-bold text-white mb-3">Exoplanet Transit Light Curve Analysis</h3>
-                    <p class="text-gray-300 mb-4">
-                        Developed a Python pipeline for detecting and analyzing exoplanet transits using photometric data. 
-                        Applied Box Least Squares (BLS) algorithm to identify periodic dips in stellar brightness.
-                    </p>
-                    
-                    <div class="mb-4">
-                        <h4 class="text-sm font-semibold text-amber-400 mb-2">Achievements</h4>
-                        <ul class="text-sm text-gray-400 space-y-1">
-                            <li>• Successfully detected known exoplanet transits</li>
-                            <li>• Estimated planetary radii from transit depth</li>
-                            <li>• Implemented noise reduction techniques</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag text-xs">Python</span>
-                        <span class="skill-tag text-xs">Lightkurve</span>
-                        <span class="skill-tag text-xs">Astropy</span>
-                        <span class="skill-tag text-xs">TESS Data</span>
-                        <span class="skill-tag text-xs">BLS Algorithm</span>
-                    </div>
+                    <p class="text-gray-300 mb-4">Developed a Python pipeline for detecting exoplanet transits using photometric data and Box Least Squares algorithm.</p>
+                    <div class="flex flex-wrap gap-2"><span class="skill-tag text-xs">Python</span><span class="skill-tag text-xs">Lightkurve</span><span class="skill-tag text-xs">TESS Data</span></div>
                 </div>
-                
-                <!-- Project 3: Spectral Analysis -->
                 <div class="card project-card p-8 rounded-lg">
                     <div class="flex items-start justify-between mb-4">
-                        <div class="bg-amber-400/10 p-4 rounded-lg project-icon">
-                            <i data-lucide="activity" class="w-8 h-8 text-amber-400"></i>
-                        </div>
+                        <div class="bg-amber-400/10 p-4 rounded-lg project-icon"><i data-lucide="activity" class="w-8 h-8 text-amber-400"></i></div>
                         <span class="status-completed px-3 py-1 rounded-full text-xs font-medium">Completed</span>
                     </div>
-                    
                     <h3 class="text-2xl font-bold text-white mb-3">Stellar Classification via Spectroscopy</h3>
-                    <p class="text-gray-300 mb-4">
-                        Machine learning approach to stellar classification using spectroscopic data. Implemented 
-                        feature extraction from absorption lines to determine stellar temperature, metallicity, and surface gravity.
-                    </p>
-                    
-                    <div class="mb-4">
-                        <h4 class="text-sm font-semibold text-amber-400 mb-2">Methods & Results</h4>
-                        <ul class="text-sm text-gray-400 space-y-1">
-                            <li>• Processed SDSS spectroscopic database</li>
-                            <li>• Achieved 94% accuracy in spectral type classification</li>
-                            <li>• Identified key diagnostic absorption features</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag text-xs">Python</span>
-                        <span class="skill-tag text-xs">Scikit-learn</span>
-                        <span class="skill-tag text-xs">Pandas</span>
-                        <span class="skill-tag text-xs">SDSS</span>
-                        <span class="skill-tag text-xs">ML Classification</span>
-                    </div>
+                    <p class="text-gray-300 mb-4">Machine learning approach to stellar classification using spectroscopic data. Achieved 94% accuracy in spectral type classification.</p>
+                    <div class="flex flex-wrap gap-2"><span class="skill-tag text-xs">Scikit-learn</span><span class="skill-tag text-xs">SDSS</span><span class="skill-tag text-xs">ML</span></div>
                 </div>
-                
-                <!-- Project 4: Cosmic Ray Detection -->
                 <div class="card project-card p-8 rounded-lg">
                     <div class="flex items-start justify-between mb-4">
-                        <div class="bg-amber-400/10 p-4 rounded-lg project-icon">
-                            <i data-lucide="zap" class="w-8 h-8 text-amber-400"></i>
-                        </div>
+                        <div class="bg-amber-400/10 p-4 rounded-lg project-icon"><i data-lucide="zap" class="w-8 h-8 text-amber-400"></i></div>
                         <span class="status-planned px-3 py-1 rounded-full text-xs font-medium">Planned</span>
                     </div>
-                    
                     <h3 class="text-2xl font-bold text-white mb-3">Cosmic Ray Muon Detection Study</h3>
-                    <p class="text-gray-300 mb-4">
-                        Upcoming project to study cosmic ray muon flux variations using scintillator detectors. 
-                        Will investigate correlations between muon rates and solar activity cycles.
-                    </p>
-                    
-                    <div class="mb-4">
-                        <h4 class="text-sm font-semibold text-amber-400 mb-2">Planned Objectives</h4>
-                        <ul class="text-sm text-gray-400 space-y-1">
-                            <li>• Build and calibrate muon detector array</li>
-                            <li>• Correlate flux with heliospheric conditions</li>
-                            <li>• Analyze seasonal and diurnal variations</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag text-xs">Particle Physics</span>
-                        <span class="skill-tag text-xs">Electronics</span>
-                        <span class="skill-tag text-xs">ROOT</span>
-                        <span class="skill-tag text-xs">Data Acquisition</span>
-                        <span class="skill-tag text-xs">Statistical Analysis</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- GitHub & Publications Link -->
-            <div class="mt-12 text-center">
-                <div class="card inline-flex items-center gap-6 p-6 rounded-lg">
-                    <div class="flex items-center gap-3">
-                        <i data-lucide="github" class="w-6 h-6 text-amber-400"></i>
-                        <div class="text-left">
-                            <p class="text-sm text-gray-400">View Code</p>
-                            <p class="text-white font-semibold">GitHub Repository</p>
-                        </div>
-                    </div>
-                    <div class="w-px h-12 bg-amber-400/30"></div>
-                    <div class="flex items-center gap-3">
-                        <i data-lucide="file-text" class="w-6 h-6 text-amber-400"></i>
-                        <div class="text-left">
-                            <p class="text-sm text-gray-400">Research Papers</p>
-                            <p class="text-white font-semibold">Coming Soon</p>
-                        </div>
-                    </div>
+                    <p class="text-gray-300 mb-4">Upcoming project to study cosmic ray muon flux variations and correlations with solar activity cycles.</p>
+                    <div class="flex flex-wrap gap-2"><span class="skill-tag text-xs">Particle Physics</span><span class="skill-tag text-xs">ROOT</span><span class="skill-tag text-xs">Statistics</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="py-24 px-6 relative" style="background: rgba(13, 17, 41, 0.8);">
+    <section id="experience" class="py-24 px-6 relative">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
                 <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Research Experience</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded-full"></div>
             </div>
-            
             <div class="space-y-12">
-                <!-- Research Intern -->
                 <div class="card p-8 rounded-lg">
                     <div class="flex items-start gap-4 mb-4">
-                        <div class="bg-amber-400/10 p-3 rounded-lg">
-                            <i data-lucide="briefcase" class="w-6 h-6 text-amber-400"></i>
-                        </div>
+                        <div class="bg-amber-400/10 p-3 rounded-lg"><i data-lucide="briefcase" class="w-6 h-6 text-amber-400"></i></div>
                         <div class="flex-1">
                             <h3 class="text-2xl font-bold text-white mb-2">Research Intern (Solar Studies)</h3>
                             <p class="text-xl text-amber-400 mb-2">Institut d'Astrophysique Spatiale</p>
-                            <div class="space-y-1 text-gray-400 text-sm">
-                                <div class="flex items-center gap-2">
-                                    <i data-lucide="map-pin" class="w-4 h-4"></i>
-                                    <span>Île-de-France, France</span>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <i data-lucide="calendar" class="w-4 h-4"></i>
-                                    <span>June 2025 - July 2025</span>
-                                    <span class="mx-2">•</span>
-                                    <span>2 months</span>
-                                </div>
-                            </div>
+                            <div class="text-gray-400 text-sm"><i data-lucide="calendar" class="w-4 h-4 inline mr-1"></i>June 2025 - July 2025</div>
                         </div>
                     </div>
-                    
-                    <p class="text-gray-300 leading-relaxed mb-4">
-                        Analysis of UV data from the EUI imager on board the Solar Orbiter probe, using tools developed in Python. 
-                        Analysis of time series, at a rate of a few seconds, of the evolution of a solar prominence. 
-                        Measurement of the variation in intensity at the base of the structure, as a signature of plasma flow. 
-                        Characterisation of these flows in terms of velocity amplitude, direction and possibly energy.
-                    </p>
-                    
-                    <div>
-                        <div class="flex items-center gap-2 mb-3">
-                            <i data-lucide="code" class="w-4 h-4 text-amber-400"></i>
-                            <h4 class="text-lg font-semibold text-white">Skills & Technologies</h4>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">UV Imaging Analysis</span>
-                            <span class="skill-tag">Time Series Analysis</span>
-                            <span class="skill-tag">Data Visualization</span>
-                            <span class="skill-tag">Solar Physics</span>
-                            <span class="skill-tag">Plasma Dynamics</span>
-                        </div>
-                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-4">Analysis of UV data from the EUI imager on board the Solar Orbiter probe, using tools developed in Python. Analysis of time series of the evolution of solar prominences and characterization of plasma flows.</p>
+                    <div class="flex flex-wrap gap-2"><span class="skill-tag">Python</span><span class="skill-tag">UV Imaging</span><span class="skill-tag">Solar Physics</span><span class="skill-tag">Plasma Dynamics</span></div>
                 </div>
-                
-                <!-- Laboratory Intern -->
                 <div class="card p-8 rounded-lg">
                     <div class="flex items-start gap-4 mb-4">
-                        <div class="bg-amber-400/10 p-3 rounded-lg">
-                            <i data-lucide="briefcase" class="w-6 h-6 text-amber-400"></i>
-                        </div>
+                        <div class="bg-amber-400/10 p-3 rounded-lg"><i data-lucide="briefcase" class="w-6 h-6 text-amber-400"></i></div>
                         <div class="flex-1">
                             <h3 class="text-2xl font-bold text-white mb-2">Laboratory Intern</h3>
                             <p class="text-xl text-amber-400 mb-2">Lycée Chateaubriand</p>
-                            <div class="space-y-1 text-gray-400 text-sm">
-                                <div class="flex items-center gap-2">
-                                    <i data-lucide="map-pin" class="w-4 h-4"></i>
-                                    <span>Paris, Île-de-France, France</span>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <i data-lucide="calendar" class="w-4 h-4"></i>
-                                    <span>November 2019 - December 2019</span>
-                                    <span class="mx-2">•</span>
-                                    <span>2 months</span>
-                                </div>
-                            </div>
+                            <div class="text-gray-400 text-sm"><i data-lucide="calendar" class="w-4 h-4 inline mr-1"></i>November 2019 - December 2019</div>
                         </div>
                     </div>
-                    
-                    <div class="mb-4">
-                        <h4 class="text-lg font-semibold text-white mb-2">Key Responsibilities</h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-start gap-2 text-gray-300 text-sm">
-                                <span class="text-amber-400 mt-1">•</span>
-                                <span>Assisted in conducting experiments and data collection in the field of physics</span>
-                            </li>
-                            <li class="flex items-start gap-2 text-gray-300 text-sm">
-                                <span class="text-amber-400 mt-1">•</span>
-                                <span>Collaborated with a team of researchers to analyze and interpret experimental results</span>
-                            </li>
-                            <li class="flex items-start gap-2 text-gray-300 text-sm">
-                                <span class="text-amber-400 mt-1">•</span>
-                                <span>Utilized scientific software and programming languages (Python, MATLAB) to process and analyze data</span>
-                            </li>
-                            <li class="flex items-start gap-2 text-gray-300 text-sm">
-                                <span class="text-amber-400 mt-1">•</span>
-                                <span>Contributed to the preparation of scientific reports</span>
-                            </li>
-                            <li class="flex items-start gap-2 text-gray-300 text-sm">
-                                <span class="text-amber-400 mt-1">•</span>
-                                <span>Demonstrated strong commitment to safety protocols and ethical considerations</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <div class="flex items-center gap-2 mb-3">
-                            <i data-lucide="code" class="w-4 h-4 text-amber-400"></i>
-                            <h4 class="text-lg font-semibold text-white">Skills & Technologies</h4>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">Laboratory Skills</span>
-                            <span class="skill-tag">Research Analysis</span>
-                            <span class="skill-tag">Scientific Computing</span>
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">MATLAB</span>
-                            <span class="skill-tag">Data Analysis</span>
-                        </div>
-                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-4">Assisted in conducting experiments and data collection. Utilized Python and MATLAB to process and analyze data. Contributed to scientific reports.</p>
+                    <div class="flex flex-wrap gap-2"><span class="skill-tag">Laboratory Skills</span><span class="skill-tag">Python</span><span class="skill-tag">MATLAB</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Certifications Section -->
-    <section id="certifications" class="py-24 px-6 relative">
+    <section id="certifications" class="py-24 px-6 relative" style="background: rgba(13, 17, 41, 0.8);">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
                 <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Certifications & Achievements</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded-full"></div>
             </div>
-            
-            <!-- Certifications Grid -->
-            <div class="grid md:grid-cols-2 gap-6 mb-16">
-                <!-- Cambridge English -->
+            <div class="grid md:grid-cols-2 gap-6 mb-12">
                 <div class="card p-6 rounded-lg">
-                    <div class="flex items-start gap-4 mb-4">
-                        <div class="bg-amber-400/10 p-3 rounded-lg">
-                            <i data-lucide="award" class="w-6 h-6 text-amber-400"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-bold text-white mb-1">English Certificate Level B2</h3>
-                            <p class="text-amber-400 mb-2">University of Cambridge</p>
-                            <div class="text-sm text-gray-400 space-y-1">
-                                <p>Issued: June 2023 • Expires: June 2025</p>
-                                <p class="font-mono text-xs">Valid through 2025</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag text-xs">English Translation</span>
-                        <span class="skill-tag text-xs">English Grammar</span>
-                        <span class="skill-tag text-xs">Written & Spoken English</span>
+                    <div class="flex items-start gap-4"><div class="bg-amber-400/10 p-3 rounded-lg"><i data-lucide="award" class="w-6 h-6 text-amber-400"></i></div>
+                        <div><h3 class="text-xl font-bold text-white mb-1">English Certificate Level B2</h3><p class="text-amber-400 mb-2">University of Cambridge</p><p class="text-sm text-gray-400">Issued: June 2023</p></div>
                     </div>
                 </div>
-                
-                <!-- Pix 1 -->
                 <div class="card p-6 rounded-lg">
-                    <div class="flex items-start gap-4 mb-4">
-                        <div class="bg-amber-400/10 p-3 rounded-lg">
-                            <i data-lucide="star" class="w-6 h-6 text-amber-400"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-bold text-white mb-1">Pix Digital Competency</h3>
-                            <p class="text-amber-400 mb-2">Pix</p>
-                            <div class="text-sm text-gray-400 space-y-1">
-                                <p>Issued: January 2024</p>
-                                <p class="font-mono text-xs">ID: P-H73GXYW8</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag text-xs">Data Analysis</span>
-                        <span class="skill-tag text-xs">Programming</span>
-                        <span class="skill-tag text-xs">Communication</span>
-                        <span class="skill-tag text-xs">Problem Solving</span>
+                    <div class="flex items-start gap-4"><div class="bg-amber-400/10 p-3 rounded-lg"><i data-lucide="star" class="w-6 h-6 text-amber-400"></i></div>
+                        <div><h3 class="text-xl font-bold text-white mb-1">Pix Digital Competency</h3><p class="text-amber-400 mb-2">Pix</p><p class="text-sm text-gray-400">Issued: January 2024</p></div>
                     </div>
                 </div>
-                
-                <!-- Pix 2 -->
                 <div class="card p-6 rounded-lg">
-                    <div class="flex items-start gap-4 mb-4">
-                        <div class="bg-amber-400/10 p-3 rounded-lg">
-                            <i data-lucide="star" class="w-6 h-6 text-amber-400"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-bold text-white mb-1">Pix Digital Skills</h3>
-                            <p class="text-amber-400 mb-2">Pix</p>
-                            <div class="text-sm text-gray-400 space-y-1">
-                                <p>Issued: February 2023 • Expires: February 2026</p>
-                                <p class="font-mono text-xs">ID: P-RCXHKDV3</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag text-xs">Digital Environment</span>
-                        <span class="skill-tag text-xs">Cybersecurity</span>
-                        <span class="skill-tag text-xs">Digital Analysis</span>
+                    <div class="flex items-start gap-4"><div class="bg-amber-400/10 p-3 rounded-lg"><i data-lucide="trophy" class="w-6 h-6 text-amber-400"></i></div>
+                        <div><h3 class="text-xl font-bold text-white mb-1">1st DAN Black Belt</h3><p class="text-amber-400 mb-2">Fédération Française de Taekwondo</p><p class="text-sm text-gray-400">Issued: January 2023</p></div>
                     </div>
                 </div>
-                
-                <!-- Taekwondo -->
                 <div class="card p-6 rounded-lg">
-                    <div class="flex items-start gap-4 mb-4">
-                        <div class="bg-amber-400/10 p-3 rounded-lg">
-                            <i data-lucide="trophy" class="w-6 h-6 text-amber-400"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-xl font-bold text-white mb-1">1st DAN Black Belt</h3>
-                            <p class="text-amber-400 mb-2">Fédération Française de Taekwondo</p>
-                            <div class="text-sm text-gray-400 space-y-1">
-                                <p>Issued: January 2023</p>
-                                <p class="font-mono text-xs">ID: 2394108069</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag text-xs">Martial Arts</span>
-                        <span class="skill-tag text-xs">Taekwondo</span>
-                        <span class="skill-tag text-xs">Discipline</span>
-                        <span class="skill-tag text-xs">Physical Training</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Achievements -->
-            <div>
-                <h3 class="text-3xl font-bold text-center mb-8">
-                    <span class="text-white">Notable </span>
-                    <span class="text-gradient">Achievements</span>
-                </h3>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="card p-6 rounded-lg text-center">
-                        <div class="bg-amber-400/10 p-4 rounded-full w-fit mx-auto mb-4">
-                            <i data-lucide="medal" class="w-8 h-8 text-amber-400"></i>
-                        </div>
-                        <h4 class="text-lg font-bold text-white mb-2">Tamil Language Excellence</h4>
-                        <p class="text-gray-300 text-sm">First place in regional eloquence competitions for multiple consecutive years</p>
-                    </div>
-                    
-                    <div class="card p-6 rounded-lg text-center">
-                        <div class="bg-amber-400/10 p-4 rounded-full w-fit mx-auto mb-4">
-                            <i data-lucide="trophy" class="w-8 h-8 text-amber-400"></i>
-                        </div>
-                        <h4 class="text-lg font-bold text-white mb-2">Tamil Schools Olympic Games</h4>
-                        <p class="text-gray-300 text-sm">First place 3 times with trophy wins in Sarcelles</p>
-                    </div>
-                    
-                    <div class="card p-6 rounded-lg text-center">
-                        <div class="bg-amber-400/10 p-4 rounded-full w-fit mx-auto mb-4">
-                            <i data-lucide="award" class="w-8 h-8 text-amber-400"></i>
-                        </div>
-                        <h4 class="text-lg font-bold text-white mb-2">Academic Excellence</h4>
-                        <p class="text-gray-300 text-sm">Consistently top position in Tamil Exams with trophies and certificates</p>
+                    <div class="flex items-start gap-4"><div class="bg-amber-400/10 p-3 rounded-lg"><i data-lucide="medal" class="w-6 h-6 text-amber-400"></i></div>
+                        <div><h3 class="text-xl font-bold text-white mb-1">Tamil Schools Olympic Games</h3><p class="text-amber-400 mb-2">3x First Place + Trophy</p><p class="text-sm text-gray-400">Multiple Years - Sarcelles</p></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 px-6 relative" style="background: rgba(13, 17, 41, 0.8);">
+    <section id="contact" class="py-24 px-6 relative">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
                 <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient">Get in Touch</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mx-auto rounded-full mb-4"></div>
-                <p class="text-gray-300 text-lg max-w-2xl mx-auto">
-                    Interested in collaborating on research projects or want to discuss astrophysics? Feel free to reach out!
-                </p>
+                <p class="text-gray-300 text-lg max-w-2xl mx-auto">Interested in collaborating on research projects or want to discuss astrophysics? Feel free to reach out!</p>
             </div>
-            
             <div class="grid md:grid-cols-2 gap-12">
-                <!-- Contact Form -->
                 <div class="card p-8 rounded-lg">
                     <h3 class="text-2xl font-bold text-white mb-6">Send a Message</h3>
                     <form id="contactForm" class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-[#0a0e27] border border-amber-400/30 rounded-lg text-white placeholder-gray-500 focus:border-amber-400 focus:outline-none" placeholder="Your Name">
-                        </div>
-                        
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-[#0a0e27] border border-amber-400/30 rounded-lg text-white placeholder-gray-500 focus:border-amber-400 focus:outline-none" placeholder="your.email@example.com">
-                        </div>
-                        
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
-                            <textarea id="message" name="message" required rows="5" class="w-full px-4 py-3 bg-[#0a0e27] border border-amber-400/30 rounded-lg text-white placeholder-gray-500 focus:border-amber-400 focus:outline-none resize-none" placeholder="Your message..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn-primary w-full inline-flex items-center justify-center px-8 py-4 text-lg text-white rounded-lg font-medium">
-                            <i data-lucide="send" class="w-5 h-5 mr-2"></i>
-                            Send Message
-                        </button>
+                        <div><label class="block text-sm font-medium text-gray-300 mb-2">Name</label><input type="text" required class="w-full px-4 py-3 bg-[#0a0e27] border border-amber-400/30 rounded-lg text-white placeholder-gray-500 focus:border-amber-400 focus:outline-none" placeholder="Your Name"></div>
+                        <div><label class="block text-sm font-medium text-gray-300 mb-2">Email</label><input type="email" required class="w-full px-4 py-3 bg-[#0a0e27] border border-amber-400/30 rounded-lg text-white placeholder-gray-500 focus:border-amber-400 focus:outline-none" placeholder="your.email@example.com"></div>
+                        <div><label class="block text-sm font-medium text-gray-300 mb-2">Message</label><textarea required rows="5" class="w-full px-4 py-3 bg-[#0a0e27] border border-amber-400/30 rounded-lg text-white placeholder-gray-500 focus:border-amber-400 focus:outline-none resize-none" placeholder="Your message..."></textarea></div>
+                        <button type="submit" class="btn-primary w-full inline-flex items-center justify-center px-8 py-4 text-lg text-white rounded-lg font-medium"><i data-lucide="send" class="w-5 h-5 mr-2"></i>Send Message</button>
                     </form>
                 </div>
-                
-                <!-- Contact Info -->
                 <div class="space-y-6">
                     <div class="card p-8 rounded-lg">
                         <h3 class="text-2xl font-bold text-white mb-6">Connect With Me</h3>
                         <div class="space-y-4">
-                            <a href="mailto:asha.balasureshwaran@example.com" class="flex items-center gap-4 p-4 bg-amber-400/5 border border-amber-400/20 rounded-lg hover:bg-amber-400/10 transition-all">
-                                <div class="bg-amber-400/10 p-3 rounded-lg">
-                                    <i data-lucide="mail" class="w-6 h-6 text-amber-400"></i>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-white">Email</p>
-                                    <p class="text-sm text-gray-400">asha.balasureshwaran@email.com</p>
-                                </div>
+                            <a href="mailto:asha.balasureshwaran@email.com" class="flex items-center gap-4 p-4 bg-amber-400/5 border border-amber-400/20 rounded-lg hover:bg-amber-400/10 transition-all">
+                                <div class="bg-amber-400/10 p-3 rounded-lg"><i data-lucide="mail" class="w-6 h-6 text-amber-400"></i></div>
+                                <div><p class="font-semibold text-white">Email</p><p class="text-sm text-gray-400">asha.balasureshwaran@email.com</p></div>
                             </a>
-                            
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 bg-amber-400/5 border border-amber-400/20 rounded-lg hover:bg-amber-400/10 transition-all">
-                                <div class="bg-amber-400/10 p-3 rounded-lg">
-                                    <i data-lucide="linkedin" class="w-6 h-6 text-amber-400"></i>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-white">LinkedIn</p>
-                                    <p class="text-sm text-gray-400">Connect on LinkedIn</p>
-                                </div>
+                            <a href="https://linkedin.com" target="_blank" class="flex items-center gap-4 p-4 bg-amber-400/5 border border-amber-400/20 rounded-lg hover:bg-amber-400/10 transition-all">
+                                <div class="bg-amber-400/10 p-3 rounded-lg"><i data-lucide="linkedin" class="w-6 h-6 text-amber-400"></i></div>
+                                <div><p class="font-semibold text-white">LinkedIn</p><p class="text-sm text-gray-400">Connect on LinkedIn</p></div>
                             </a>
-                            
-                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 bg-amber-400/5 border border-amber-400/20 rounded-lg hover:bg-amber-400/10 transition-all">
-                                <div class="bg-amber-400/10 p-3 rounded-lg">
-                                    <i data-lucide="github" class="w-6 h-6 text-amber-400"></i>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-white">GitHub</p>
-                                    <p class="text-sm text-gray-400">View Projects on GitHub</p>
-                                </div>
+                            <a href="https://github.com" target="_blank" class="flex items-center gap-4 p-4 bg-amber-400/5 border border-amber-400/20 rounded-lg hover:bg-amber-400/10 transition-all">
+                                <div class="bg-amber-400/10 p-3 rounded-lg"><i data-lucide="github" class="w-6 h-6 text-amber-400"></i></div>
+                                <div><p class="font-semibold text-white">GitHub</p><p class="text-sm text-gray-400">View Projects</p></div>
                             </a>
                         </div>
                     </div>
-                    
                     <div class="card p-8 rounded-lg">
                         <h3 class="text-2xl font-bold text-white mb-4">Location</h3>
-                        <p class="text-gray-300 mb-2">
-                            <span class="font-semibold text-amber-400">Based in:</span> Île-de-France, France
-                        </p>
-                        <p class="text-gray-300">
-                            <span class="font-semibold text-amber-400">Currently studying at:</span> Université Paris-Saclay
-                        </p>
+                        <p class="text-gray-300 mb-2"><span class="font-semibold text-amber-400">Based in:</span> Île-de-France, France</p>
+                        <p class="text-gray-300"><span class="font-semibold text-amber-400">Currently studying at:</span> Université Paris-Saclay</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-[#0a0e27] border-t border-amber-400/20 py-8 px-6 relative z-10">
         <div class="container mx-auto max-w-6xl">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="text-center md:text-left">
-                    <p class="text-gray-300">
-                        © <span id="currentYear"></span>
-                        <span class="text-amber-400 font-semibold"> Asha Balasureshwaran</span>. All rights reserved.
-                    </p>
-                </div>
-                
-                <div class="flex items-center gap-2 text-gray-300">
-                    <span>Made with</span>
-                    <i data-lucide="heart" class="w-4 h-4 text-amber-400 fill-current animate-pulse"></i>
-                    <span>for exploring the cosmos</span>
-                </div>
+                <p class="text-gray-300">© <span id="currentYear"></span> <span class="text-amber-400 font-semibold">Asha Balasureshwaran</span>. All rights reserved.</p>
+                <div class="flex items-center gap-2 text-gray-300"><span>Made with</span><span class="text-amber-400">❤</span><span>for exploring the cosmos</span></div>
             </div>
-            
             <div class="mt-6 text-center">
-                <p class="text-sm text-gray-400">
-                    "The cosmos is within us. We are made of star-stuff. We are a way for the universe to know itself."
-                    <span class="block mt-1 text-amber-400">- Carl Sagan</span>
-                </p>
+                <p class="text-sm text-gray-400">"The cosmos is within us. We are made of star-stuff." <span class="block mt-1 text-amber-400">- Carl Sagan</span></p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Initialize Lucide icons
         lucide.createIcons();
-        
-        // Current year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
-        
-        // ========== ENHANCED STARFIELD GENERATOR ==========
+
+        const planetData = {
+            sun: { name: "The Sun", type: "G-type Main-Sequence Star (Yellow Dwarf)", description: "The Sun is the star at the center of our Solar System. It's a nearly perfect ball of hot plasma, heated to incandescence by nuclear fusion reactions in its core, radiating energy mainly as visible light and infrared radiation.", visual: "radial-gradient(circle, #fff9c4 0%, #fbbf24 30%, #f97316 60%, #ea580c 100%)", stats: [{ value: "1.989 × 10³⁰ kg", label: "Mass" }, { value: "696,340 km", label: "Radius" }, { value: "5,778 K", label: "Surface Temp" }, { value: "4.6 billion yrs", label: "Age" }], funFact: "The Sun contains 99.86% of all mass in our Solar System. You could fit about 1.3 million Earths inside it! ☀️" },
+            mercury: { name: "Mercury", type: "Terrestrial Planet", description: "Mercury is the smallest planet and closest to the Sun. Despite this, it's not the hottest—temperatures vary from -180°C at night to 430°C during the day due to no atmosphere.", visual: "linear-gradient(135deg, #9ca3af 0%, #6b7280 50%, #4b5563 100%)", stats: [{ value: "3.285 × 10²³ kg", label: "Mass" }, { value: "2,439.7 km", label: "Radius" }, { value: "88 days", label: "Year Length" }, { value: "0", label: "Moons" }], funFact: "A day on Mercury (sunrise to sunrise) lasts 176 Earth days, but a year is only 88 days. So a day is longer than a year! 🤯" },
+            venus: { name: "Venus", type: "Terrestrial Planet", description: "Venus is Earth's 'twin' in size but has a toxic atmosphere of CO₂ and sulfuric acid clouds, making it the hottest planet at 465°C—hot enough to melt lead!", visual: "linear-gradient(135deg, #fde68a 0%, #f59e0b 50%, #d97706 100%)", stats: [{ value: "4.867 × 10²⁴ kg", label: "Mass" }, { value: "6,051.8 km", label: "Radius" }, { value: "225 days", label: "Year Length" }, { value: "465°C", label: "Surface Temp" }], funFact: "Venus rotates backwards! The Sun rises in the west and sets in the east. Talk about being different! 💫" },
+            earth: { name: "Earth", type: "Terrestrial Planet", description: "Earth is the only known planet with life, with 71% of its surface covered by water. Our atmosphere and magnetic field protect us from harmful solar radiation.", visual: "linear-gradient(135deg, #60a5fa 0%, #3b82f6 30%, #22c55e 60%, #16a34a 100%)", stats: [{ value: "5.972 × 10²⁴ kg", label: "Mass" }, { value: "6,371 km", label: "Radius" }, { value: "365.25 days", label: "Year Length" }, { value: "1", label: "Moons" }], funFact: "Earth is the only planet not named after a Greek or Roman god. The name comes from Old English meaning 'ground.' We're literally the Ground Planet! 🌍" },
+            mars: { name: "Mars", type: "Terrestrial Planet", description: "The 'Red Planet' has the largest volcano (Olympus Mons) and canyon (Valles Marineris) in the Solar System. It's currently being explored by rovers and is a prime candidate for human colonization.", visual: "linear-gradient(135deg, #fca5a5 0%, #ef4444 50%, #b91c1c 100%)", stats: [{ value: "6.39 × 10²³ kg", label: "Mass" }, { value: "3,389.5 km", label: "Radius" }, { value: "687 days", label: "Year Length" }, { value: "2", label: "Moons" }], funFact: "Olympus Mons is 22 km high—nearly 3× taller than Mount Everest! Good luck climbing that one! 🏔️" },
+            jupiter: { name: "Jupiter", type: "Gas Giant", description: "Jupiter is the largest planet, with mass more than twice all other planets combined. Its Great Red Spot is a storm raging for at least 400 years, and it has 95 known moons!", visual: "linear-gradient(135deg, #fde68a 0%, #d97706 25%, #92400e 50%, #fbbf24 75%, #b45309 100%)", stats: [{ value: "1.898 × 10²⁷ kg", label: "Mass" }, { value: "69,911 km", label: "Radius" }, { value: "12 years", label: "Year Length" }, { value: "95", label: "Moons" }], funFact: "Jupiter's Great Red Spot is so big that 2-3 Earths could fit inside it! It's been storming non-stop for 400+ years. Now THAT'S bad weather! 🌪️" },
+            saturn: { name: "Saturn", type: "Gas Giant", description: "Saturn is famous for its stunning rings made of ice and rock. It's the second-largest planet with 146 known moons, including Titan with its own thick atmosphere and liquid hydrocarbon lakes.", visual: "linear-gradient(135deg, #fef3c7 0%, #fcd34d 50%, #b45309 100%)", stats: [{ value: "5.683 × 10²⁶ kg", label: "Mass" }, { value: "58,232 km", label: "Radius" }, { value: "29 years", label: "Year Length" }, { value: "146", label: "Moons" }], funFact: "Saturn is so light for its size that if you could find a bathtub big enough, it would float! Its density is less than water. Rubber ducky Saturn! 🛁" },
+            uranus: { name: "Uranus", type: "Ice Giant", description: "Uranus is an 'ice giant' that rotates on its side with a 98° tilt—probably from an ancient collision. Its blue-green color comes from methane in the atmosphere.", visual: "linear-gradient(135deg, #a5f3fc 0%, #22d3ee 50%, #0891b2 100%)", stats: [{ value: "8.681 × 10²⁵ kg", label: "Mass" }, { value: "25,362 km", label: "Radius" }, { value: "84 years", label: "Year Length" }, { value: "27", label: "Moons" }], funFact: "Uranus literally rolls around the Sun on its side like a bowling ball! Scientists think a huge collision billions of years ago knocked it over. Cosmic clumsiness! 🎳" },
+            neptune: { name: "Neptune", type: "Ice Giant", description: "Neptune is the windiest planet with speeds up to 2,100 km/h. It was discovered through mathematical predictions before being observed—a triumph of celestial mechanics!", visual: "linear-gradient(135deg, #818cf8 0%, #4f46e5 50%, #3730a3 100%)", stats: [{ value: "1.024 × 10²⁶ kg", label: "Mass" }, { value: "24,622 km", label: "Radius" }, { value: "165 years", label: "Year Length" }, { value: "16", label: "Moons" }], funFact: "Neptune was found by math before anyone saw it! Scientists calculated where an unknown planet should be based on Uranus's wobbly orbit, then pointed telescopes there. Math saves the day! 🔢" }
+        };
+
+        function openPlanetModal(planet) {
+            const data = planetData[planet];
+            if (!data) return;
+            document.getElementById('modalPlanetVisual').style.background = data.visual;
+            document.getElementById('modalPlanetVisual').style.boxShadow = '0 0 60px 20px rgba(251, 191, 36, 0.3)';
+            document.getElementById('modalPlanetName').textContent = data.name;
+            document.getElementById('modalPlanetType').textContent = data.type;
+            document.getElementById('modalPlanetDescription').textContent = data.description;
+            document.getElementById('modalFunFact').textContent = data.funFact;
+            const statsHTML = data.stats.map(s => `<div class="stat-item"><div class="stat-value">${s.value}</div><div class="stat-label">${s.label}</div></div>`).join('');
+            document.getElementById('modalPlanetStats').innerHTML = statsHTML;
+            document.getElementById('planetModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePlanetModal() {
+            document.getElementById('planetModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('planetModal').addEventListener('click', function(e) {
+            if (e.target === this) closePlanetModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closePlanetModal();
+        });
+
         function createStarfield() {
             const starfield = document.getElementById('starfield');
-            const numStars = 150; // Number of stars
-            
+            const numStars = 120;
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                
-                // Random size
-                const sizeClass = Math.random();
-                if (sizeClass < 0.6) {
-                    star.classList.add('small');
-                } else if (sizeClass < 0.9) {
-                    star.classList.add('medium');
-                } else {
-                    star.classList.add('large');
-                }
-                
-                // Some colored stars
-                const colorRandom = Math.random();
-                if (colorRandom > 0.95) {
-                    star.classList.add('golden');
-                } else if (colorRandom > 0.90) {
-                    star.classList.add('blue');
-                }
-                
-                // Random position
+                const sizeRand = Math.random();
+                if (sizeRand < 0.5) star.classList.add('small');
+                else if (sizeRand < 0.85) star.classList.add('medium');
+                else star.classList.add('large');
+                const colorRand = Math.random();
+                if (colorRand > 0.94) star.classList.add('golden');
+                else if (colorRand > 0.88) star.classList.add('blue');
+                else if (colorRand > 0.82) star.classList.add('purple');
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
-                
-                // Random animation duration and delay
-                star.style.setProperty('--duration', (3 + Math.random() * 7) + 's');
+                star.style.setProperty('--duration', (4 + Math.random() * 6) + 's');
                 star.style.setProperty('--delay', (Math.random() * 5) + 's');
-                
                 starfield.appendChild(star);
             }
         }
-        
-        // Create starfield on load
         createStarfield();
-        // ========== END STARFIELD GENERATOR ==========
-        
-        // Header scroll effect
+
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 header.style.background = 'rgba(10, 14, 39, 0.95)';
                 header.style.backdropFilter = 'blur(12px)';
-                header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
             } else {
                 header.style.background = 'transparent';
                 header.style.backdropFilter = 'none';
-                header.style.boxShadow = 'none';
             }
         });
-        
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('show');
+
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('show');
         });
-        
-        // Close mobile menu when clicking on a link
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('show');
-            });
+
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('show'));
         });
-        
-        // Active navigation link
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= sectionTop - 100) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-        
-        // Contact form submission
-        const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! This is a demo form. In a real website, this would send your message.');
-            contactForm.reset();
-        });
-        
-        // Smooth scroll
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! This is a demo form.');
+            e.target.reset();
         });
     </script>
 </body>
